@@ -90,7 +90,7 @@ class ProductController extends AppController
             ),
         ]
     )]
-    #[Post('products')]
+    #[Post('products', middleware: '')]
     public function store(
         StoreProductRequest $request,
         CreateProductService $createProductService
