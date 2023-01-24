@@ -29,7 +29,7 @@ use Spatie\RouteAttributes\Attributes\Put;
  * Class ProductController
  * @package App\Http\Controllers\Api
  */
-#[OA\Tag(name: 'App\Http\Controllers\Api\Product', description: 'Product endpoints')]
+#[OA\Tag(name: 'ProductController', description: 'Product endpoints')]
 class ProductController extends AppController
 {
     // todo policy
@@ -43,7 +43,6 @@ class ProductController extends AppController
      */
     #[OA\Get(
         path: '/api/products',
-//        security: [['BearerAuth' => []]],
         tags: ['Product'],
         responses: [
             new OA\Response(
@@ -58,7 +57,7 @@ class ProductController extends AppController
             )
         ]
     )]
-    #[Get('products')]
+    #[Get('products', middleware: 'auth:sanctum')]
     public function index(
         Request $request,
         GetProductService $getProductService
@@ -77,7 +76,7 @@ class ProductController extends AppController
      */
     #[OA\Post(
         path: '/api/products',
-//        security: [['BearerAuth' => []]],
+        security: [['BearerAuth' => []]],
         requestBody: new OA\RequestBody(
             content: new OA\JsonContent(ref: '#/components/schemas/StoreProductRequest')
         ),
@@ -90,7 +89,7 @@ class ProductController extends AppController
             ),
         ]
     )]
-    #[Post('products', middleware: '')]
+    #[Post('products', middleware: 'auth:sanctum')]
     public function store(
         StoreProductRequest $request,
         CreateProductService $createProductService
@@ -108,7 +107,7 @@ class ProductController extends AppController
      */
     #[OA\Get(
         path: '/api/v1/products/{id}',
-//        security: [['BearerAuth' => []]],
+        security: [['BearerAuth' => []]],
         tags: ['Product'],
         parameters: [
             new OA\Parameter(
@@ -143,7 +142,7 @@ class ProductController extends AppController
      */
     #[OA\Put(
         path: '/api/v1/products/{id}',
-//        security: [['BearerAuth' => []]],
+        security: [['BearerAuth' => []]],
         requestBody: new OA\RequestBody(
             content: new OA\JsonContent(ref: '#/components/schemas/UpdateProductRequest')
         ),
@@ -218,4 +217,11 @@ class ProductController extends AppController
             __('validation.custom.delete.cant_remove', ['attribute' => 'product'])
         );
     }
+
+    // todo: restore
+    // todo: forceDelete
+    // todo: restoreAll
+    // todo: forceDeleteAll
+    // todo: Move all code to admin controller
+    // todo: refactor to __invoke
 }

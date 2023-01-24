@@ -29,6 +29,7 @@ use Spatie\RouteAttributes\Attributes\Put;
  * Class BrandController
  * @package App\Http\Controllers\Api
  */
+#[OA\Tag(name: 'BrandController', description: 'Brand endpoints')]
 class BrandController extends AppController
 {
     // todo policy
@@ -42,7 +43,7 @@ class BrandController extends AppController
      */
     #[OA\Get(
         path: '/api/brands',
-//        security: [['BearerAuth' => []]],
+        security: [['BearerAuth' => []]],
         tags: ['Brand'],
         responses: [
             new OA\Response(
@@ -76,7 +77,7 @@ class BrandController extends AppController
      */
     #[OA\Post(
         path: '/api/brands',
-//        security: [['BearerAuth' => []]],
+        security: [['BearerAuth' => []]],
         requestBody: new OA\RequestBody(
             content: new OA\JsonContent(ref: '#/components/schemas/StoreBrandRequest')
         ),
@@ -107,7 +108,7 @@ class BrandController extends AppController
      */
     #[OA\Get(
         path: '/api/v1/brands/{id}',
-//        security: [['BearerAuth' => []]],
+        security: [['BearerAuth' => []]],
         tags: ['Brand'],
         parameters: [
             new OA\Parameter(
@@ -142,7 +143,7 @@ class BrandController extends AppController
      */
     #[OA\Put(
         path: '/api/v1/brands/{id}',
-//        security: [['BearerAuth' => []]],
+        security: [['BearerAuth' => []]],
         requestBody: new OA\RequestBody(
             content: new OA\JsonContent(ref: '#/components/schemas/UpdateBrandRequest')
         ),
@@ -187,7 +188,7 @@ class BrandController extends AppController
      */
     #[OA\Delete(
         path: '/api/v1/brands/{id}',
-//        security: [['BearerAuth' => []]],
+        security: [['BearerAuth' => []]],
         tags: ['Brand'],
         parameters: [
             new OA\Parameter(
@@ -217,4 +218,11 @@ class BrandController extends AppController
             __('validation.custom.delete.cant_remove', ['attribute' => 'brand'])
         );
     }
+
+    // todo: restore
+    // todo: forceDelete
+    // todo: restoreAll
+    // todo: forceDeleteAll
+    // todo: Move all code to admin controller
+    // todo: refactor to __invoke
 }

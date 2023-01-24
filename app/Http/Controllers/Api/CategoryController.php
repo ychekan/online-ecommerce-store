@@ -29,6 +29,7 @@ use Spatie\RouteAttributes\Attributes\Put;
  * Class CategoryController
  * @package App\Http\Controllers\Api
  */
+#[OA\Tag(name: 'CategoryController', description: 'Category endpoints')]
 class CategoryController extends AppController
 {
     // todo policy
@@ -42,7 +43,6 @@ class CategoryController extends AppController
      */
     #[OA\Get(
         path: '/api/categories',
-//        security: [['BearerAuth' => []]],
         tags: ['Category'],
         responses: [
             new OA\Response(
@@ -76,7 +76,7 @@ class CategoryController extends AppController
      */
     #[OA\Post(
         path: '/api/categories',
-//        security: [['BearerAuth' => []]],
+        security: [['BearerAuth' => []]],
         requestBody: new OA\RequestBody(
             content: new OA\JsonContent(ref: '#/components/schemas/StoreCategoryRequest')
         ),
@@ -107,7 +107,7 @@ class CategoryController extends AppController
      */
     #[OA\Get(
         path: '/api/v1/categories/{id}',
-//        security: [['BearerAuth' => []]],
+        security: [['BearerAuth' => []]],
         tags: ['Category'],
         parameters: [
             new OA\Parameter(
@@ -142,7 +142,7 @@ class CategoryController extends AppController
      */
     #[OA\Put(
         path: '/api/v1/categories/{id}',
-//        security: [['BearerAuth' => []]],
+        security: [['BearerAuth' => []]],
         requestBody: new OA\RequestBody(
             content: new OA\JsonContent(ref: '#/components/schemas/UpdateCategoryRequest')
         ),
@@ -187,7 +187,7 @@ class CategoryController extends AppController
      */
     #[OA\Delete(
         path: '/api/v1/categories/{id}',
-//        security: [['BearerAuth' => []]],
+        security: [['BearerAuth' => []]],
         tags: ['Category'],
         parameters: [
             new OA\Parameter(
@@ -217,4 +217,11 @@ class CategoryController extends AppController
             __('validation.custom.delete.cant_remove', ['attribute' => 'category'])
         );
     }
+
+    // todo: restore
+    // todo: forceDelete
+    // todo: restoreAll
+    // todo: forceDeleteAll
+    // todo: Move all code to admin controller
+    // todo: refactor to __invoke
 }
