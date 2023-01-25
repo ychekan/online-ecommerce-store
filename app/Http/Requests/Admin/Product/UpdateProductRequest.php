@@ -1,17 +1,16 @@
 <?php
 declare(strict_types=1);
 
-namespace App\Http\Requests\Product;
+namespace App\Http\Requests\Admin\Product;
 
 use Illuminate\Foundation\Http\FormRequest;
 use OpenApi\Attributes as OA;
 
 /**
- * Class StoreProductRequest
+ * Class UpdateProductRequest
  * @package App\Http\Requests\Product
  */
 #[OA\Schema(
-    required: ['name', 'price'],
     properties: [
         new OA\Property('name', description: 'Product name', type: 'string', maxLength: 255),
         new OA\Property('price', description: 'Product price', type: 'number', maximum: 10000, minimum: 0, ),
@@ -32,7 +31,7 @@ use OpenApi\Attributes as OA;
         ),
     ]
 )]
-class StoreProductRequest extends FormRequest
+class UpdateProductRequest extends FormRequest
 {
     /**
      * Get the validation rules that apply to the request.
@@ -42,11 +41,11 @@ class StoreProductRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'name' => ['required', 'string', 'max:255'],
-            'price' => ['required', 'numeric', 'min:0', 'max:' . config('constants.max_product_price')],
-            'description' => ['string', 'max:10000'],
-            'available' => ['integer', 'min:0', 'max:1000'],
-            'sale' => ['numeric', 'min:0', 'max:100'],
+            'name' => ['string', 'max:255'],
+            'price' => ['numeric', 'nullable', 'min:0', 'max:' . config('constants.max_product_price')],
+            'description' => ['string', 'nullable', 'max:10000'],
+            'available' => ['integer', 'nullable', 'min:0', 'max:1000'],
+            'sale' => ['numeric', 'nullable', 'min:0', 'max:100'],
         ];
     }
 }

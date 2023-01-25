@@ -146,7 +146,11 @@ return [
             'rule-name' => 'custom-message',
         ],
         'delete' => [
-            'cant_remove' => 'Can\'t remove :attribute. Something wrong.'
+            'cant_remove' => 'Can\'t remove :attribute. Something wrong.',
+            'cant_force_delete' => 'Can\'t force delete :attribute. Something wrong.',
+        ],
+        'restore' => [
+            'cant_restore' => 'Can\'t restore :attribute. Something wrong.'
         ]
     ],
 
