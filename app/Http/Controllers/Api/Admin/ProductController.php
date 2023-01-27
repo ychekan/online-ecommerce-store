@@ -225,7 +225,7 @@ class ProductController extends AppController
     }
 
     /**
-     * Restore the specified Product by ID.
+     * Restore the specified Products by ID.
      *
      * @param RestoreProductRequest $request
      * @param RestoreProductService $restoreProductService
