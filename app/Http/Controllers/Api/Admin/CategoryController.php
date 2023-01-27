@@ -225,7 +225,7 @@ class CategoryController extends AppController
      * Restore the specified Categories by ID.
      *
      * @param RestoreCategoryRequest $request
-     * @param RestoreCategoryService $restoreProductService
+     * @param RestoreCategoryService $restoreCategoryService
      * @return AnonymousResourceCollection|ValidationErrorException
      * @throws ValidationErrorException
      */
@@ -252,12 +252,12 @@ class CategoryController extends AppController
     #[Post('admin/products/restore')]
     public function restore(
         RestoreCategoryRequest $request,
-        RestoreCategoryService $restoreProductService
+        RestoreCategoryService $restoreCategoryService
     ): AnonymousResourceCollection|ValidationErrorException
     {
-        $products = $restoreProductService->run($request->all());
-        if ($products->isNotEmpty()) {
-            return CategoryResource::collection($products);
+        $categories = $restoreCategoryService->run($request->all());
+        if ($categories->isNotEmpty()) {
+            return CategoryResource::collection($categories);
         }
 
         throw new ValidationErrorException(
@@ -266,7 +266,7 @@ class CategoryController extends AppController
     }
 
     /**
-     * Remove the specified Product by ID.
+     * Remove the specified Category by ID.
      *
      * @param Category $category
      * @param ForceDeleteCategoryService $forceDeleteCategoryService

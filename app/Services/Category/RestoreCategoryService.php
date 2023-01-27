@@ -31,7 +31,7 @@ class RestoreCategoryService extends AppService
         $categories = Category::onlyTrashed()
             ->whereIn('id', $ids)->get();
 
-        $categories->map(fn ($product) => $product->restore());
+        $categories->map(fn ($category) => $category->restore());
 
         return $categories;
     }
