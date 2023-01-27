@@ -6,22 +6,17 @@ use App\DTO\Category\StoreCategoryDTO;
 use App\DTO\Category\UpdateCategoryDTO;
 use App\Exceptions\ValidationErrorException;
 use App\Http\Controllers\AppController;
-use App\Http\Requests\Admin\Product\RestoreProductRequest;
 use App\Http\Requests\Category\RestoreCategoryRequest;
 use App\Http\Requests\Category\StoreCategoryRequest;
 use App\Http\Requests\Category\UpdateCategoryRequest;
 use App\Http\Resources\Category\CategoryResource;
-use App\Http\Resources\Product\ProductResource;
 use App\Models\Category;
-use App\Models\Product;
 use App\Services\Category\CreateCategoryService;
 use App\Services\Category\DeleteCategoryService;
 use App\Services\Category\ForceDeleteCategoryService;
 use App\Services\Category\GetCategoryService;
 use App\Services\Category\RestoreCategoryService;
 use App\Services\Category\UpdateCategoryService;
-use App\Services\Product\ForceDeleteProductService;
-use App\Services\Product\RestoreProductService;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
 use Illuminate\Http\Response;
@@ -40,6 +35,7 @@ use OpenApi\Attributes as OA;
 class CategoryController extends AppController
 {
     // todo policy
+    // todo manual testing
 
     /**
      * Display a listing of the Categories.
