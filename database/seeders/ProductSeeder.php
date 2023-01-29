@@ -10,6 +10,7 @@ use App\Models\Image;
 use App\Models\Product;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Str;
 use Nette\Utils\Random;
 
 class ProductSeeder extends Seeder
@@ -231,7 +232,7 @@ class ProductSeeder extends Seeder
             if (!$category->exists()) {
                 $category = Category::create([
                     'name' => $categoryValue,
-                    'slug' => $categoryValue,
+                    'slug' => Str::slug($categoryValue),
                 ]);
             } else {
                 $category = $category->first();

@@ -11,12 +11,14 @@ use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
 use OpenApi\Attributes as OA;
 use Spatie\RouteAttributes\Attributes\Get;
+use Spatie\RouteAttributes\Attributes\Where;
 
 /**
  * Class ProductController
  * @package App\Http\Controllers\Api
  */
 #[OA\Tag(name: 'ProductController', description: 'Product endpoints')]
+#[Where('product', '[a-z0-1\-]+')]
 class ProductController extends AppController
 {
     /**
@@ -59,7 +61,7 @@ class ProductController extends AppController
      * @return ProductResource
      */
     #[OA\Get(
-        path: '/api/v1/products/{id}',
+        path: '/api/products/{id}',
         security: [['BearerAuth' => []]],
         tags: ['Product'],
         parameters: [

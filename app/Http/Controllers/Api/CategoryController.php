@@ -11,12 +11,14 @@ use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
 use OpenApi\Attributes as OA;
 use Spatie\RouteAttributes\Attributes\Get;
+use Spatie\RouteAttributes\Attributes\Where;
 
 /**
  * Class CategoryController
  * @package App\Http\Controllers\Api
  */
 #[OA\Tag(name: 'CategoryController', description: 'Category endpoints')]
+#[Where('category', '[a-z0-1\-]+')]
 class CategoryController extends AppController
 {
     /**
@@ -59,7 +61,7 @@ class CategoryController extends AppController
      * @return CategoryResource
      */
     #[OA\Get(
-        path: '/api/v1/categories/{id}',
+        path: '/api/categories/{id}',
         security: [['BearerAuth' => []]],
         tags: ['Category'],
         parameters: [

@@ -44,7 +44,7 @@ return [
     |
     */
 
-    'expiration' => 2,
+    'expiration' => 5,
 
     /*
     |--------------------------------------------------------------------------
@@ -62,4 +62,13 @@ return [
         'encrypt_cookies' => App\Http\Middleware\EncryptCookies::class,
     ],
 
+    /*
+     * Cookie timezones
+     */
+    'timezone' => 'Europe/Kyiv',
+
+    /**
+     * Remember me token expired time, in minutes
+     */
+    'expiration_remember_me' => 60 * 24 * 7, // 1 week
 ];

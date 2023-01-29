@@ -5,7 +5,6 @@ namespace App\Services\Brand;
 
 use App\Models\Brand;
 use App\Services\AppService;
-use Illuminate\Database\Eloquent\Collection;
 
 /**
  * Class RestoreBrandService
@@ -14,25 +13,22 @@ use Illuminate\Database\Eloquent\Collection;
 class RestoreBrandService extends AppService
 {
     /**
-     * @param array $ids
-     * @return Collection
+     * @param Brand $brand
+     * @return Brand
      */
-    public function run(array $ids): Collection
+    public function run(Brand $brand): Brand
     {
-        return $this->restoreBrands($ids);
+        return $this->restoreBrand($brand);
     }
 
     /**
-     * @param array $ids
-     * @return Collection
+     * @param Brand $brand
+     * @return Brand
      */
-    private function restoreBrands(array $ids): Collection
+    private function restoreBrand(Brand $brand): Brand
     {
-        $brands = Brand::onlyTrashed()
-            ->whereIn('id', $ids)->get();
+        $brand->restore();
 
-        $brands->map(fn ($brand) => $brand->restore());
-
-        return $brands;
+        return $brand->refresh();
     }
 }

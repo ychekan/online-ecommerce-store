@@ -71,6 +71,14 @@ class Brand extends Model
     }
 
     /**
+     * @return string
+     */
+    public function getRouteKeyName(): string
+    {
+        return 'slug';
+    }
+
+    /**
      * Get the brand images.
      */
     public function images(): MorphMany

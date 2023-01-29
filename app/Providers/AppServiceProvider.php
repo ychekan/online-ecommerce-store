@@ -2,9 +2,12 @@
 
 namespace App\Providers;
 
+use App\Models\PersonalAccessToken;
+use Carbon\Carbon;
 use Faker\Factory as FakerFactory;
 use Faker\Generator as FakerGenerator;
 use Illuminate\Support\ServiceProvider;
+use Laravel\Sanctum\Sanctum;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -27,6 +30,14 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        //
+        Sanctum::usePersonalAccessTokenModel(PersonalAccessToken::class);
+
+        Sanctum::authenticateAccessTokensUsing(function (PersonalAccessToken $token, $isValid) {
+            if ($isValid ?: $token?->expired_at->isFuture()) {
+                return true;
+            }
+            $token->delete();
+            return false;
+        });
     }
 }

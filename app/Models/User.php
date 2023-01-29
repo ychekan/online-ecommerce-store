@@ -4,6 +4,7 @@ declare(strict_types=1);
 namespace App\Models;
 
 use App\Traits\PaginationTrait;
+use App\Traits\SanctumHasApiTokens;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -18,19 +19,31 @@ use Spatie\Permission\Traits\HasRoles;
  * @package App\Models
  *
  * @property int $id
- * @property string $name
+ * @property string $first_name
+ * @property string $last_name
  * @property string $email
- * @property \Illuminate\Support\Carbon|null $email_verified_at
+ * @property string $phone
+ * @property string $city
+ * @property string $state
+ * @property string $zip
+ * @property string $country
+ * @property string $street
+ * @property string $apartment
+ * @property string $as_delivery_address
  * @property string $password
  * @property string|null $remember_token
+ * @property \Illuminate\Support\Carbon|null $email_verified_at
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property \Illuminate\Support\Carbon|null $deleted_at
  * @method static create(array $toArray)
+ * @method static firstWhere(string $string, array|string|null $cookie)
  */
 class User extends Authenticatable implements MustVerifyEmail
 {
     use HasRoles;
     use HasApiTokens;
+    use SanctumHasApiTokens;
     use HasFactory;
     use Notifiable;
     use PaginationTrait;
@@ -45,6 +58,14 @@ class User extends Authenticatable implements MustVerifyEmail
         'last_name',
         'email',
         'password',
+        'phone',
+        'city',
+        'state',
+        'zip',
+        'country',
+        'street',
+        'apartment',
+        'as_delivery_address',
     ];
 
     /**
@@ -64,6 +85,7 @@ class User extends Authenticatable implements MustVerifyEmail
      */
     protected $casts = [
         'email_verified_at' => 'datetime',
+        'as_delivery_address' => 'boolean',
     ];
 
     /**

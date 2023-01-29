@@ -81,6 +81,14 @@ class Product extends Model
     ];
 
     /**
+     * @return string
+     */
+    public function getRouteKeyName(): string
+    {
+        return 'slug';
+    }
+
+    /**
      * Generate slug name
      *
      * @return Attribute

@@ -25,13 +25,19 @@ use OpenApi\Attributes as OA;
 use Spatie\RouteAttributes\Attributes\Delete;
 use Spatie\RouteAttributes\Attributes\Get;
 use Spatie\RouteAttributes\Attributes\Post;
+use Spatie\RouteAttributes\Attributes\Prefix;
 use Spatie\RouteAttributes\Attributes\Put;
+use Spatie\RouteAttributes\Attributes\Middleware;
+use Spatie\RouteAttributes\Attributes\Where;
 
 /**
  * Class BrandController
  * @package App\Http\Controllers\Api\Admin
  */
 #[OA\Tag(name: 'BrandController', description: 'Admin Brand endpoints')]
+#[Middleware(['auth:sanctum', 'role:admin,manager'])]
+#[Prefix('admin')]
+#[Where('brand', '[0-9]+')]
 class BrandController extends AppController
 {
     // todo policy
@@ -60,7 +66,7 @@ class BrandController extends AppController
             )
         ]
     )]
-    #[Get('admin/brands')]
+    #[Get('brands')]
     public function index(
         Request $request,
         GetBrandService $getBrandService
@@ -92,13 +98,13 @@ class BrandController extends AppController
             ),
         ]
     )]
-    #[Post('admin/brands')]
+    #[Post('brands')]
     public function store(
         StoreBrandRequest $request,
         CreateBrandService $createBrandService
     ): BrandResource {
         return new BrandResource(
-            $createBrandService->run(StoreBrandDTO::from($request->all()))
+            $createBrandService->run(StoreBrandDTO::from($request->validated()))
         );
     }
 
@@ -109,7 +115,7 @@ class BrandController extends AppController
      * @return BrandResource
      */
     #[OA\Get(
-        path: '/api/v1/admin/brands/{id}',
+        path: '/api/admin/brands/{id}',
         security: [['BearerAuth' => []]],
         tags: ['AdminBrand'],
         parameters: [
@@ -128,7 +134,7 @@ class BrandController extends AppController
             ),
         ]
     )]
-    #[Get('admin/brands/{brand}')]
+    #[Get('brands/{brand:id}')]
     public function show(Brand $brand): BrandResource
     {
         return new BrandResource($brand);
@@ -144,7 +150,7 @@ class BrandController extends AppController
      * @throws ValidationException
      */
     #[OA\Put(
-        path: '/api/v1/admin/brands/{id}',
+        path: '/api/admin/brands/{id}',
         security: [['BearerAuth' => []]],
         requestBody: new OA\RequestBody(
             content: new OA\JsonContent(ref: '#/components/schemas/UpdateBrandRequest')
@@ -166,7 +172,7 @@ class BrandController extends AppController
             ),
         ]
     )]
-    #[Put('admin/brands/{brand}')]
+    #[Put('brands/{brand:id}')]
     public function update(
         UpdateBrandRequest $request,
         Brand $brand,
@@ -174,7 +180,7 @@ class BrandController extends AppController
     ): BrandResource {
         return new BrandResource(
             $updateBrandService->run(
-                UpdateBrandDTO::validate($request->all()),
+                UpdateBrandDTO::validate($request->validated()),
                 $brand
             )
         );
@@ -189,7 +195,7 @@ class BrandController extends AppController
      * @throws ValidationErrorException
      */
     #[OA\Delete(
-        path: '/api/v1/admin/brands/{id}',
+        path: '/api/admin/brands/{id}',
         security: [['BearerAuth' => []]],
         tags: ['AdminBrand'],
         parameters: [
@@ -207,7 +213,7 @@ class BrandController extends AppController
             ),
         ]
     )]
-    #[Delete('admin/brands/{brand}')]
+    #[Delete('brands/{brand:id}')]
     public function destroy(
         Brand $brand,
         DeleteBrandService $deleteBrandService
@@ -222,42 +228,39 @@ class BrandController extends AppController
     }
 
     /**
-     * Restore the specified Brands by ID.
+     * Restore the specified Brand by ID.
      *
-     * @param RestoreBrandRequest $request
+     * @param Brand $brand
      * @param RestoreBrandService $restoreBrandService
-     * @return AnonymousResourceCollection|ValidationErrorException
+     * @return BrandResource|ValidationErrorException
      * @throws ValidationErrorException
      */
     #[OA\Post(
-        path: '/api/admin/brands/restore',
+        path: '/api/admin/brands/{id}/restore',
         security: [['BearerAuth' => []]],
-        requestBody: new OA\RequestBody(
-            content: new OA\JsonContent(ref: '#/components/schemas/RestoreBrandRequest')
-        ),
         tags: ['AdminBrand'],
         responses: [
             new OA\Response(
                 response: '200',
-                description: 'Restore brands',
+                description: 'Restore brand',
                 content: [
-                    new OA\JsonContent(
-                        type: 'array',
-                        items: new OA\Items(ref: '#/components/schemas/BrandResource')
-                    )
+                    new OA\Response(
+                        response: '200',
+                        description: 'Restore the specified Brand by ID',
+                        content: new OA\JsonContent(ref: '#/components/schemas/BrandResource')
+                    ),
                 ]
             ),
         ]
     )]
-    #[Post('admin/brands/restore')]
+    #[Post('brands/{brand:id}/restore')]
     public function restore(
-        RestoreBrandRequest $request,
+        Brand $brand,
         RestoreBrandService $restoreBrandService
-    ): AnonymousResourceCollection|ValidationErrorException
+    ): BrandResource|ValidationErrorException
     {
-        $brands = $restoreBrandService->run($request->all());
-        if ($brands->isNotEmpty()) {
-            return BrandResource::collection($brands);
+        if ($brand = $restoreBrandService->run($brand)) {
+            return new BrandResource($brand);
         }
 
         throw new ValidationErrorException(
@@ -274,7 +277,7 @@ class BrandController extends AppController
      * @throws ValidationErrorException
      */
     #[OA\Delete(
-        path: '/api/v1/admin/brands/{id}/force',
+        path: '/api/admin/brands/{id}/force',
         security: [['BearerAuth' => []]],
         tags: ['AdminBrand'],
         parameters: [
@@ -292,7 +295,7 @@ class BrandController extends AppController
             ),
         ]
     )]
-    #[Delete('admin/brands/{brand}/force')]
+    #[Delete('brands/{brand:id}/force')]
     public function force(
         Brand $brand,
         ForceDeleteBrandService $forceDeleteBrandService
@@ -306,4 +309,93 @@ class BrandController extends AppController
             __('validation.custom.delete.cant_force_delete', ['attribute' => 'brand'])
         );
     }
+
+//    /**
+//     * Remove the specified Brands by ID.
+//     *
+//     * @param Brand $brand
+//     * @param DeleteBrandService $deleteBrandService
+//     * @return Response|ValidationErrorException
+//     * @throws ValidationErrorException
+//     */
+//    #[OA\Delete(
+//        path: '/api/admin/brands/{id}',
+//        security: [['BearerAuth' => []]],
+//        tags: ['AdminBrand'],
+//        parameters: [
+//            new OA\Parameter(
+//                name: 'id',
+//                description: 'Brand ID',
+//                in: 'path',
+//                required: true,
+//            ),
+//        ],
+//        responses: [
+//            new OA\Response(
+//                response: '204',
+//                description: 'Removed the specified Brand by ID'
+//            ),
+//        ]
+//    )]
+//    #[Delete('admin/brands/{brand}')]
+//    public function destroy(
+//        Brand $brand,
+//        DeleteBrandService $deleteBrandService
+//    ): Response|ValidationErrorException {
+//        if ($deleteBrandService->run($brand)) {
+//            return response()->noContent();
+//        }
+//
+//        throw new ValidationErrorException(
+//            __('validation.custom.delete.cant_remove', ['attribute' => 'brand'])
+//        );
+//    }
+//
+//    /**
+//     * Restore the specified Brands by ID.
+//     *
+//     * @param RestoreBrandRequest $request
+//     * @param RestoreBrandService $restoreBrandService
+//     * @return AnonymousResourceCollection|ValidationErrorException
+//     * @throws ValidationErrorException
+//     */
+//    #[OA\Post(
+//        path: '/api/admin/brands/restore',
+//        security: [['BearerAuth' => []]],
+//        requestBody: new OA\RequestBody(
+//            content: new OA\JsonContent(ref: '#/components/schemas/RestoreBrandRequest')
+//        ),
+//        tags: ['AdminBrand'],
+//        responses: [
+//            new OA\Response(
+//                response: '200',
+//                description: 'Restore brands',
+//                content: [
+//                    new OA\JsonContent(
+//                        type: 'array',
+//                        items: new OA\Items(ref: '#/components/schemas/BrandResource')
+//                    )
+//                ]
+//            ),
+//        ]
+//    )]
+//    #[Post('admin/brands/restore')]
+//    public function restore(
+//        RestoreBrandRequest $request,
+//        RestoreBrandService $restoreBrandService
+//    ): AnonymousResourceCollection|ValidationErrorException
+//    {
+//        $brands = $restoreBrandService->run($request->validated());
+//        if ($brands->isNotEmpty()) {
+//            return BrandResource::collection($brands);
+//        }
+//
+//        throw new ValidationErrorException(
+//            __('validation.custom.restore.cant_restore', ['attribute' => 'brand'])
+//        );
+//    }
+
+// todo: add multiple soft delete
+// todo: add multiple force delete
+// todo: add multiple restore
 }

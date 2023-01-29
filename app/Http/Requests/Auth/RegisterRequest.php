@@ -4,6 +4,7 @@ declare(strict_types=1);
 namespace App\Http\Requests\Auth;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rules\Password;
 use OpenApi\Attributes as OA;
 
 /**
@@ -13,11 +14,11 @@ use OpenApi\Attributes as OA;
 #[OA\Schema(
     required: ['name'],
     properties: [
-        new OA\Property('first_name', description: 'User first name', type: 'string', maxLength: 255),
-        new OA\Property('last_name', description: 'User last name', type: 'string', maxLength: 255),
+        new OA\Property('first_name', description: 'User first name', type: 'string', maxLength: 50),
+        new OA\Property('last_name', description: 'User last name', type: 'string', maxLength: 50),
         new OA\Property('email', description: 'User email', type: 'string', maxLength: 100),
-        new OA\Property('password', description: 'User password', type: 'string', maxLength: 255),
-        new OA\Property('password_confirmation', description: 'User password confirmation', type: 'string', maxLength: 255),
+        new OA\Property('password', description: 'User password', type: 'string', maxLength: 50),
+        new OA\Property('password_confirmation', description: 'User password confirmation', type: 'string', maxLength: 50),
     ]
 )]
 class RegisterRequest extends FormRequest
@@ -30,10 +31,21 @@ class RegisterRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'first_name' => ['required', 'string', 'max:255'],
-            'last_name' => ['required', 'string', 'max:255'],
+            'first_name' => ['required', 'string', 'max:50'],
+            'last_name' => ['required', 'string', 'max:50'],
             'email' => ['required', 'string', 'max:100', 'unique:users,email'],
-            'password' => ['required', 'string', 'confirmed']
+            'password' => [
+                'required',
+                'string',
+                'confirmed',
+                'max:50',
+                Password::min(8)
+                    ->letters()
+                    ->mixedCase()
+                    ->numbers()
+                    ->symbols()
+                    ->uncompromised()
+            ]
         ];
     }
 }

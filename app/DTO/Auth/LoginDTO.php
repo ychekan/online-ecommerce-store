@@ -4,9 +4,9 @@ declare(strict_types=1);
 namespace App\DTO\Auth;
 
 use App\DTO\AbstractDTO;
+use Spatie\LaravelData\Attributes\Validation\BooleanType;
 use Spatie\LaravelData\Attributes\Validation\Email;
 use Spatie\LaravelData\Attributes\Validation\Max;
-use Spatie\LaravelData\Attributes\Validation\Unique;
 
 /**
  * Class LoginDTO
@@ -17,6 +17,7 @@ final class LoginDTO extends AbstractDTO
     /**
      * @param string $email
      * @param string $password
+     * @param bool $remember_me
      */
     public function __construct(
         /**
@@ -24,13 +25,12 @@ final class LoginDTO extends AbstractDTO
          */
         #[Max(100)]
         #[email]
-        #[Unique('users', 'email')]
         public string $email,
 
         /**
          * @var string User password
          */
-        #[Max(255)]
+        #[Max(50)]
         public string $password,
     )
     {

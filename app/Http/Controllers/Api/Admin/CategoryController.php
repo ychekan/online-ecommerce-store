@@ -23,15 +23,21 @@ use Illuminate\Http\Response;
 use Illuminate\Validation\ValidationException;
 use Spatie\RouteAttributes\Attributes\Delete;
 use Spatie\RouteAttributes\Attributes\Get;
+use Spatie\RouteAttributes\Attributes\Middleware;
 use Spatie\RouteAttributes\Attributes\Post;
+use Spatie\RouteAttributes\Attributes\Prefix;
 use Spatie\RouteAttributes\Attributes\Put;
 use OpenApi\Attributes as OA;
+use Spatie\RouteAttributes\Attributes\Where;
 
 /**
  * Class CategoryController
  * @package App\Http\Controllers\Api\Admin
  */
 #[OA\Tag(name: 'CategoryController', description: 'Admin Category endpoints')]
+#[Middleware(['auth:sanctum', 'role:admin,manager'])]
+#[Prefix('admin')]
+#[Where('category', '[0-9]+')]
 class CategoryController extends AppController
 {
     // todo policy
@@ -60,7 +66,7 @@ class CategoryController extends AppController
             )
         ]
     )]
-    #[Get('admin/categories', middleware: 'auth:sanctum')]
+    #[Get('categories')]
     public function index(
         Request $request,
         GetCategoryService $getCategoryService
@@ -92,13 +98,13 @@ class CategoryController extends AppController
             ),
         ]
     )]
-    #[Post('admin/categories', middleware: 'auth:sanctum')]
+    #[Post('categories')]
     public function store(
         StoreCategoryRequest $request,
         CreateCategoryService $createCategoryService
     ): CategoryResource {
         return new CategoryResource(
-            $createCategoryService->run(StoreCategoryDTO::from($request->all()))
+            $createCategoryService->run(StoreCategoryDTO::from($request->validated()))
         );
     }
 
@@ -109,7 +115,7 @@ class CategoryController extends AppController
      * @return CategoryResource
      */
     #[OA\Get(
-        path: '/api/v1/admin/categories/{id}',
+        path: '/api/admin/categories/{id}',
         security: [['BearerAuth' => []]],
         tags: ['Category'],
         parameters: [
@@ -128,7 +134,7 @@ class CategoryController extends AppController
             ),
         ]
     )]
-    #[Get('admin/categories/{category}', middleware: 'auth:sanctum')]
+    #[Get('categories/{category:id}')]
     public function show(Category $category): CategoryResource
     {
         return new CategoryResource($category);
@@ -144,7 +150,7 @@ class CategoryController extends AppController
      * @throws ValidationException
      */
     #[OA\Put(
-        path: '/api/v1/admin/categories/{id}',
+        path: '/api/admin/categories/{id}',
         security: [['BearerAuth' => []]],
         requestBody: new OA\RequestBody(
             content: new OA\JsonContent(ref: '#/components/schemas/UpdateCategoryRequest')
@@ -166,7 +172,7 @@ class CategoryController extends AppController
             ),
         ]
     )]
-    #[Put('admin/categories/{category}', middleware: 'auth:sanctum')]
+    #[Put('categories/{category:id}')]
     public function update(
         UpdateCategoryRequest $request,
         Category $category,
@@ -174,7 +180,7 @@ class CategoryController extends AppController
     ): CategoryResource {
         return new CategoryResource(
             $updateCategoryService->run(
-                UpdateCategoryDTO::validate($request->all()),
+                UpdateCategoryDTO::validate($request->validated()),
                 $category
             )
         );
@@ -189,7 +195,7 @@ class CategoryController extends AppController
      * @throws ValidationErrorException
      */
     #[OA\Delete(
-        path: '/api/v1/admin/categories/{id}',
+        path: '/api/admin/categories/{id}',
         security: [['BearerAuth' => []]],
         tags: ['Category'],
         parameters: [
@@ -207,7 +213,7 @@ class CategoryController extends AppController
             ),
         ]
     )]
-    #[Delete('admin/categories/{category}', middleware: 'auth:sanctum')]
+    #[Delete('categories/{category:id}')]
     public function destroy(
         Category $category,
         DeleteCategoryService $deleteCategoryService
@@ -249,13 +255,13 @@ class CategoryController extends AppController
             ),
         ]
     )]
-    #[Post('admin/products/restore')]
+    #[Post('categories/restore')]
     public function restore(
         RestoreCategoryRequest $request,
         RestoreCategoryService $restoreCategoryService
     ): AnonymousResourceCollection|ValidationErrorException
     {
-        $categories = $restoreCategoryService->run($request->all());
+        $categories = $restoreCategoryService->run($request->validated());
         if ($categories->isNotEmpty()) {
             return CategoryResource::collection($categories);
         }
@@ -274,7 +280,7 @@ class CategoryController extends AppController
      * @throws ValidationErrorException
      */
     #[OA\Delete(
-        path: '/api/v1/admin/categories/{id}/force',
+        path: '/api/admin/categories/{id}/force',
         security: [['BearerAuth' => []]],
         tags: ['AdminCategory'],
         parameters: [
@@ -292,7 +298,7 @@ class CategoryController extends AppController
             ),
         ]
     )]
-    #[Delete('admin/categories/{product}/force')]
+    #[Delete('categories/{category:id}/force')]
     public function force(
         Category $category,
         ForceDeleteCategoryService $forceDeleteCategoryService
@@ -306,4 +312,8 @@ class CategoryController extends AppController
             __('validation.custom.delete.cant_force_delete', ['attribute' => 'category'])
         );
     }
+
+    // todo: add multiple soft delete
+    // todo: add multiple force delete
+    // todo: add multiple restore
 }

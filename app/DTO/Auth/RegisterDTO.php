@@ -21,17 +21,16 @@ final class RegisterDTO extends AbstractDTO
      * @param string $password
      */
     public function __construct(
-
         /**
          * @var string User first name
          */
-        #[Max(255)]
+        #[Max(50)]
         public string $first_name,
 
         /**
          * @var string User last name
          */
-        #[Max(255)]
+        #[Max(50)]
         public string $last_name,
 
         /**
@@ -45,7 +44,7 @@ final class RegisterDTO extends AbstractDTO
         /**
          * @var string User password
          */
-        #[Max(255)]
+        #[Max(50)]
         public string $password,
     )
     {

@@ -24,14 +24,20 @@ use Illuminate\Validation\ValidationException;
 use OpenApi\Attributes as OA;
 use Spatie\RouteAttributes\Attributes\Delete;
 use Spatie\RouteAttributes\Attributes\Get;
+use Spatie\RouteAttributes\Attributes\Middleware;
 use Spatie\RouteAttributes\Attributes\Post;
+use Spatie\RouteAttributes\Attributes\Prefix;
 use Spatie\RouteAttributes\Attributes\Put;
+use Spatie\RouteAttributes\Attributes\Where;
 
 /**
  * Class ProductController
  * @package App\Http\Controllers\Api\Admin
  */
 #[OA\Tag(name: 'ProductController', description: 'Admin product endpoints')]
+#[Middleware(['auth:sanctum', 'role:admin'])]
+#[Prefix('admin')]
+#[Where('product', '[0-9]+')]
 class ProductController extends AppController
 {
     // todo policy
@@ -59,7 +65,7 @@ class ProductController extends AppController
             )
         ]
     )]
-    #[Get('admin/products', middleware: 'auth:sanctum')]
+    #[Get('products')]
     public function index(
         Request $request,
         GetProductService $getProductService
@@ -92,14 +98,14 @@ class ProductController extends AppController
             ),
         ]
     )]
-    #[Post('admin/products', middleware: 'auth:sanctum')]
+    #[Post('products')]
     public function store(
         StoreProductRequest $request,
         CreateProductService $createProductService
     ): ProductResource
     {
         return new ProductResource(
-            $createProductService->run(StoreProductDTO::from($request->all()))
+            $createProductService->run(StoreProductDTO::from($request->validated()))
         );
     }
 
@@ -110,7 +116,7 @@ class ProductController extends AppController
      * @return ProductResource
      */
     #[OA\Get(
-        path: '/api/v1/admin/products/{id}',
+        path: '/api/admin/products/{id}',
         security: [['BearerAuth' => []]],
         tags: ['AdminProduct'],
         parameters: [
@@ -129,7 +135,7 @@ class ProductController extends AppController
             ),
         ]
     )]
-    #[Get('admin/products/{product}')]
+    #[Get('products/{product:id}')]
     public function show(Product $product): ProductResource
     {
         return new ProductResource($product);
@@ -145,7 +151,7 @@ class ProductController extends AppController
      * @throws ValidationException
      */
     #[OA\Put(
-        path: '/api/v1/admin/products/{id}',
+        path: '/api/admin/products/{id}',
         security: [['BearerAuth' => []]],
         requestBody: new OA\RequestBody(
             content: new OA\JsonContent(ref: '#/components/schemas/UpdateProductRequest')
@@ -167,7 +173,7 @@ class ProductController extends AppController
             ),
         ]
     )]
-    #[Put('admin/products/{product}')]
+    #[Put('products/{product:id}')]
     public function update(
         UpdateProductRequest $request,
         Product $product,
@@ -176,7 +182,7 @@ class ProductController extends AppController
     {
         return new ProductResource(
             $updateProductService->run(
-                UpdateProductDTO::validate($request->all()),
+                UpdateProductDTO::validate($request->validated()),
                 $product
             )
         );
@@ -191,7 +197,7 @@ class ProductController extends AppController
      * @throws ValidationErrorException
      */
     #[OA\Delete(
-        path: '/api/v1/admin/products/{id}',
+        path: '/api/admin/products/{id}',
         security: [['BearerAuth' => []]],
         tags: ['AdminProduct'],
         parameters: [
@@ -209,7 +215,7 @@ class ProductController extends AppController
             ),
         ]
     )]
-    #[Delete('admin/products/{product}')]
+    #[Delete('products/{product:id}')]
     public function destroy(
         Product $product,
         DeleteProductService $deleteProductService
@@ -252,13 +258,13 @@ class ProductController extends AppController
             ),
         ]
     )]
-    #[Post('admin/products/restore')]
+    #[Post('products/restore')]
     public function restore(
         RestoreProductRequest $request,
         RestoreProductService $restoreProductService
     ): AnonymousResourceCollection|ValidationErrorException
     {
-        $products = $restoreProductService->run($request->all());
+        $products = $restoreProductService->run($request->validated());
         if ($products->isNotEmpty()) {
             return ProductResource::collection($products);
         }
@@ -277,7 +283,7 @@ class ProductController extends AppController
      * @throws ValidationErrorException
      */
     #[OA\Delete(
-        path: '/api/v1/admin/products/{id}/force',
+        path: '/api/admin/products/{id}/force',
         security: [['BearerAuth' => []]],
         tags: ['AdminProduct'],
         parameters: [
@@ -295,7 +301,7 @@ class ProductController extends AppController
             ),
         ]
     )]
-    #[Delete('admin/products/{product}/force')]
+    #[Delete('products/{product:id}/force')]
     public function force(
         Product $product,
         ForceDeleteProductService $forceDeleteProductService
@@ -309,4 +315,8 @@ class ProductController extends AppController
             __('validation.custom.delete.cant_force_delete', ['attribute' => 'product'])
         );
     }
+
+    // todo: add multiple soft delete
+    // todo: add multiple force delete
+    // todo: add multiple restore
 }

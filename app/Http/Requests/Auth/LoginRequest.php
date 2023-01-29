@@ -3,7 +3,9 @@ declare(strict_types=1);
 
 namespace App\Http\Requests\Auth;
 
+use App\Rules\EmailVerifiedAtRule;
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 use OpenApi\Attributes as OA;
 
 /**
@@ -14,7 +16,8 @@ use OpenApi\Attributes as OA;
     required: ['email', 'password'],
     properties: [
         new OA\Property('email', description: 'User email', type: 'email', maxLength: 100),
-        new OA\Property('password', description: 'User password', type: 'string', maxLength: 255),
+        new OA\Property('password', description: 'User password', type: 'string', maxLength: 50),
+        new OA\Property('remeber_me', description: 'Remember me', type: 'boolean'),
     ]
 )]
 class LoginRequest extends FormRequest
@@ -27,8 +30,14 @@ class LoginRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'email' => ['required', 'email'],
+            'email' => [
+                'required',
+                'email',
+                new EmailVerifiedAtRule(),
+                Rule::exists('users', 'email')->withoutTrashed()
+            ],
             'password' => ['required'],
+            'remember_me' => ['boolean', 'nullable'],
         ];
     }
 }
