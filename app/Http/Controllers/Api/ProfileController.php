@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api;
 
 use App\DTO\Profile\ProfilePasswordDTO;
 use App\DTO\Profile\UpdateProfileDTO;
+use App\Exceptions\ValidationErrorException;
 use App\Http\Controllers\AppController;
 use App\Http\Requests\Profile\ProfilePasswordRequest;
 use App\Http\Requests\Profile\UpdateProfileRequest;
@@ -87,6 +88,7 @@ class ProfileController extends AppController
      * @param ProfilePasswordService $profilePasswordService
      * @return ProfileResource
      * @throws ValidationException
+     * @throws ValidationErrorException
      */
     #[OA\Put(
         path: '/api/profile/password',
@@ -99,7 +101,7 @@ class ProfileController extends AppController
             new OA\Response(
                 response: '200',
                 description: 'Update user password',
-                content: new OA\JsonContent(ref: '#/components/schemas/ProfilePasswordService')
+                content: new OA\JsonContent(ref: '#/components/schemas/ProfileResource')
             ),
         ]
     )]

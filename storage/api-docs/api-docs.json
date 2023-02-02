@@ -5,13 +5,13 @@
         "version": "0.1"
     },
     "paths": {
-        "/api/brands": {
+        "/api/admin/brands": {
             "get": {
                 "tags": [
-                    "Brand"
+                    "AdminBrand"
                 ],
                 "summary": "Display a listing of the Brands.",
-                "operationId": "130f2bd423b6fe2355253e2c39878d99",
+                "operationId": "75605c4db2e3dc0225481241d0d7921a",
                 "responses": {
                     "200": {
                         "description": "Display a listing of the Brands",
@@ -26,14 +26,19 @@
                             }
                         }
                     }
-                }
+                },
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ]
             },
             "post": {
                 "tags": [
-                    "Brand"
+                    "AdminBrand"
                 ],
                 "summary": "Store a newly created Brand.",
-                "operationId": "283de011874bd2a1ada6efafb676e83f",
+                "operationId": "4f025f26cd6259684ebc61a96ca06828",
                 "requestBody": {
                     "content": {
                         "application/json": {
@@ -54,16 +59,21 @@
                             }
                         }
                     }
-                }
+                },
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ]
             }
         },
-        "/api/v1/brands/{id}": {
+        "/api/admin/brands/{id}": {
             "get": {
                 "tags": [
-                    "Brand"
+                    "AdminBrand"
                 ],
                 "summary": "Display the specified Brand by ID.",
-                "operationId": "befc6782b0af600cd794a28884a659ee",
+                "operationId": "a6da6c39276d50ac8382d21fc4f184d0",
                 "parameters": [
                     {
                         "name": "id",
@@ -83,14 +93,19 @@
                             }
                         }
                     }
-                }
+                },
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ]
             },
             "put": {
                 "tags": [
-                    "Brand"
+                    "AdminBrand"
                 ],
                 "summary": "Update the specified Brand by ID.",
-                "operationId": "a997f9c8c2375563082336da9a7dc12d",
+                "operationId": "0d2cf120fdb808ee402c9ba1874e10fc",
                 "parameters": [
                     {
                         "name": "id",
@@ -119,14 +134,19 @@
                             }
                         }
                     }
-                }
+                },
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ]
             },
             "delete": {
                 "tags": [
-                    "Brand"
+                    "AdminBrand"
                 ],
                 "summary": "Remove the specified Brand by ID.",
-                "operationId": "ad3cf4df875227932db396b9c69a1108",
+                "operationId": "a5b037cfc0c0421d256deb3334ff71b6",
                 "parameters": [
                     {
                         "name": "id",
@@ -139,16 +159,67 @@
                     "204": {
                         "description": "Removed the specified Brand by ID"
                     }
-                }
+                },
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ]
             }
         },
-        "/api/categories": {
+        "/api/admin/brands/{id}/restore": {
+            "post": {
+                "tags": [
+                    "AdminBrand"
+                ],
+                "summary": "Restore the specified Brand by ID.",
+                "operationId": "6692ecc0ba05270a45419300aed2a34a",
+                "responses": {
+                    "200": {
+                        "description": "Restore brand"
+                    }
+                },
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/api/admin/brands/{id}/force": {
+            "delete": {
+                "tags": [
+                    "AdminBrand"
+                ],
+                "summary": "Remove the specified Brand by ID.",
+                "operationId": "2ca731be77ebfdc148267c275bbb953b",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Brand ID",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "204": {
+                        "description": "Removed the specified Brand by ID"
+                    }
+                },
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/api/admin/categories": {
             "get": {
                 "tags": [
-                    "Category"
+                    "AdminCategory"
                 ],
                 "summary": "Display a listing of the Categories.",
-                "operationId": "ac9c4d978ea4e5b72915ca9728e5b8b1",
+                "operationId": "71fce704423c89eab31adce4a23df70b",
                 "responses": {
                     "200": {
                         "description": "Display a listing of the Categories",
@@ -170,7 +241,7 @@
                     "Category"
                 ],
                 "summary": "Store a newly created Category.",
-                "operationId": "cca49a87d9b0ebb9a98ad7c154b71737",
+                "operationId": "810e8b9fee1619d4229208cb942c486a",
                 "requestBody": {
                     "content": {
                         "application/json": {
@@ -191,16 +262,21 @@
                             }
                         }
                     }
-                }
+                },
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ]
             }
         },
-        "/api/v1/categories/{id}": {
+        "/api/admin/categories/{id}": {
             "get": {
                 "tags": [
                     "Category"
                 ],
                 "summary": "Display the specified Category by ID.",
-                "operationId": "11d2d45398d538612b1a4156d210652e",
+                "operationId": "dd1a3fd24575b2b12b6c8235fd29de4e",
                 "parameters": [
                     {
                         "name": "id",
@@ -220,14 +296,19 @@
                             }
                         }
                     }
-                }
+                },
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ]
             },
             "put": {
                 "tags": [
                     "Category"
                 ],
                 "summary": "Update the specified Category by ID.",
-                "operationId": "8edd529bf8c5d2c024f479805defe8b6",
+                "operationId": "6b267ce72356fa2805c1484f48318133",
                 "parameters": [
                     {
                         "name": "id",
@@ -256,14 +337,19 @@
                             }
                         }
                     }
-                }
+                },
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ]
             },
             "delete": {
                 "tags": [
                     "Category"
                 ],
                 "summary": "Remove the specified Category by ID.",
-                "operationId": "91c938105382f9b2d833cb18706e6694",
+                "operationId": "6ee6ff59b8676a6da057579bba1331ad",
                 "parameters": [
                     {
                         "name": "id",
@@ -276,16 +362,86 @@
                     "204": {
                         "description": "Removed the specified Category by ID"
                     }
-                }
+                },
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ]
             }
         },
-        "/api/products": {
+        "/api/admin/categories/restore": {
+            "post": {
+                "tags": [
+                    "AdminCategory"
+                ],
+                "summary": "Restore the specified Categories by ID.",
+                "operationId": "0fec3a7c4071f4101d4cd674637a5034",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/RestoreCategoryRequest"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Restore categories",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/CategoryResource"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/api/admin/categories/{id}/force": {
+            "delete": {
+                "tags": [
+                    "AdminCategory"
+                ],
+                "summary": "Remove the specified Category by ID.",
+                "operationId": "6b9e29be92a4391fe3b8a7c1d03e4ee7",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Category ID",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "204": {
+                        "description": "Removed the specified Category by ID"
+                    }
+                },
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/api/admin/products": {
             "get": {
                 "tags": [
-                    "Product"
+                    "AdminProduct"
                 ],
                 "summary": "Display a listing of the Products.",
-                "operationId": "d97d1c3727cbac49708b85f7d11f7d58",
+                "operationId": "9058305dfe0377e6cf7c5253ed664401",
                 "responses": {
                     "200": {
                         "description": "Display a listing of the Products",
@@ -304,10 +460,10 @@
             },
             "post": {
                 "tags": [
-                    "Product"
+                    "AdminProduct"
                 ],
                 "summary": "Store a newly created Product.",
-                "operationId": "785644b7d7dd38af4b51dafd0fbc1b6d",
+                "operationId": "e78a4cd5a8e47d96daa7a5a7a13d3e30",
                 "requestBody": {
                     "content": {
                         "application/json": {
@@ -328,16 +484,21 @@
                             }
                         }
                     }
-                }
+                },
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ]
             }
         },
-        "/api/v1/products/{id}": {
+        "/api/admin/products/{id}": {
             "get": {
                 "tags": [
-                    "Product"
+                    "AdminProduct"
                 ],
                 "summary": "Display the specified Product by ID.",
-                "operationId": "e607d06420046014759462af284aeb59",
+                "operationId": "e645351e64571486935b1fbb5743d6b8",
                 "parameters": [
                     {
                         "name": "id",
@@ -357,14 +518,19 @@
                             }
                         }
                     }
-                }
+                },
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ]
             },
             "put": {
                 "tags": [
-                    "Product"
+                    "AdminProduct"
                 ],
                 "summary": "Update the specified Product by ID.",
-                "operationId": "d3addbe72313169741e652404694ef9d",
+                "operationId": "78c34d6552e97335a6594ceaf054d60f",
                 "parameters": [
                     {
                         "name": "id",
@@ -393,14 +559,19 @@
                             }
                         }
                     }
-                }
+                },
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ]
             },
             "delete": {
                 "tags": [
-                    "Product"
+                    "AdminProduct"
                 ],
                 "summary": "Remove the specified Product by ID.",
-                "operationId": "bbf520f1a23d6a5f3dfb12813b5930d6",
+                "operationId": "14131d6e77dc1537765eaa35848d3941",
                 "parameters": [
                     {
                         "name": "id",
@@ -413,7 +584,606 @@
                     "204": {
                         "description": "Removed the specified Product by ID"
                     }
+                },
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/api/admin/products/restore": {
+            "post": {
+                "tags": [
+                    "AdminProduct"
+                ],
+                "summary": "Restore the specified Products by ID.",
+                "operationId": "4d671f0d8b20222a0775f07ffd84fd84",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/RestoreProductRequest"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Restore products",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/ProductResource"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/api/admin/products/{id}/force": {
+            "delete": {
+                "tags": [
+                    "AdminProduct"
+                ],
+                "summary": "Remove the specified Product by ID.",
+                "operationId": "0e38ce21db896c0371ed2b703d5348f1",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Product ID",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "204": {
+                        "description": "Removed the specified Product by ID"
+                    }
+                },
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/api/forgot-password": {
+            "post": {
+                "tags": [
+                    "Auth"
+                ],
+                "operationId": "4a3e9135aa2e26d12d718f591de1fdce",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/ForgotPasswordRequest"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Forgot password",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/SuccessResource"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/api/login": {
+            "post": {
+                "tags": [
+                    "Auth"
+                ],
+                "summary": "Login user.",
+                "operationId": "1ede4abe4ada89bc305f8cb59117f0c0",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/LoginRequest"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Login user",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/SuccessResource"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Validation error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/ValidationErrorException"
+                                    }
+                                }
+                            }
+                        }
+                    }
                 }
+            }
+        },
+        "/api/logout": {
+            "post": {
+                "tags": [
+                    "Auth"
+                ],
+                "operationId": "1713bea214c8ec7cff47023cf266ad88",
+                "responses": {
+                    "200": {
+                        "description": "Logout user",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/SuccessResource"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/api/register": {
+            "post": {
+                "tags": [
+                    "Auth"
+                ],
+                "operationId": "5f0e95584653d7bbeaae9c3e51a58d4a",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/RegisterRequest"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Register user",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/UserResource"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Validation error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/ValidationErrorException"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/reset-password": {
+            "post": {
+                "tags": [
+                    "Auth"
+                ],
+                "operationId": "57a07a3f4686d599373f7b77a3169c99",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/ResetPasswordRequest"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Reset password",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/SuccessResource"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/api/reset-verify-email": {
+            "post": {
+                "tags": [
+                    "Auth"
+                ],
+                "operationId": "8974fcde845ab9abb48a7576ea952e0c",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/ResetVerifyEmailRequest"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Login user",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/SuccessResource"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/verify-email": {
+            "post": {
+                "tags": [
+                    "Auth"
+                ],
+                "summary": "Verify email.",
+                "operationId": "050369241908a015171cf19558f0b89c",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/VerifyEmailRequest"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Login user",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/SuccessResource"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/brands": {
+            "get": {
+                "tags": [
+                    "Brand"
+                ],
+                "summary": "Display a listing of the Brands.",
+                "operationId": "130f2bd423b6fe2355253e2c39878d99",
+                "responses": {
+                    "200": {
+                        "description": "Display a listing of the Brands",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/BrandResource"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/api/brands/{id}": {
+            "get": {
+                "tags": [
+                    "Brand"
+                ],
+                "summary": "Display the specified Brand by ID.",
+                "operationId": "2086e16f9b1a70aea714677ef42808a7",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Brand ID",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Display the specified Brand by ID",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/BrandResource"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/api/categories": {
+            "get": {
+                "tags": [
+                    "Category"
+                ],
+                "summary": "Display a listing of the Categories.",
+                "operationId": "ac9c4d978ea4e5b72915ca9728e5b8b1",
+                "responses": {
+                    "200": {
+                        "description": "Display a listing of the Categories",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/CategoryResource"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/categories/{id}": {
+            "get": {
+                "tags": [
+                    "Category"
+                ],
+                "summary": "Display the specified Category by ID.",
+                "operationId": "09767bb2e47dde77dd1e2591428b0ae1",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Category ID",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Display the specified Category by ID",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/CategoryResource"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/api/products": {
+            "get": {
+                "tags": [
+                    "Product"
+                ],
+                "summary": "Display a listing of the Products.",
+                "operationId": "d97d1c3727cbac49708b85f7d11f7d58",
+                "responses": {
+                    "200": {
+                        "description": "Display a listing of the Products",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/ProductResource"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/products/{id}": {
+            "get": {
+                "tags": [
+                    "Product"
+                ],
+                "summary": "Display the specified Product by ID.",
+                "operationId": "c87fb2e4d617e7b36c712cad358acdb8",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Product ID",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Display the specified Product by ID",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ProductResource"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/api/profile": {
+            "get": {
+                "tags": [
+                    "Profile"
+                ],
+                "operationId": "89ae2330f9c4cf3bb2ed90c8c3f43f54",
+                "responses": {
+                    "200": {
+                        "description": "Display the user profile",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ProfileResource"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ]
+            },
+            "put": {
+                "tags": [
+                    "Profile"
+                ],
+                "summary": "Update profile of the user.",
+                "operationId": "453c910347993ff43538e3a0157cd6e6",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/UpdateProfileRequest"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Update the user Profile",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ProfileResource"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/api/profile/password": {
+            "put": {
+                "tags": [
+                    "Profile"
+                ],
+                "operationId": "732e4b5eec3a0588bcd0275105324024",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/ProfilePasswordRequest"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Update user password",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ProfileResource"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ]
             }
         }
     },
@@ -486,54 +1256,52 @@
                     "CANCELED"
                 ]
             },
-            "StoreBrandRequest": {
-                "required": [
-                    "name"
-                ],
+            "UserRoleEnum": {
                 "properties": {
-                    "name": {
-                        "description": "Brand name",
+                    "UserRoleEnum": {
                         "type": "string",
-                        "maxLength": 255
+                        "enum": [
+                            "admin",
+                            "user",
+                            "manager"
+                        ]
+                    }
+                },
+                "type": "string",
+                "enum": [
+                    "ADMIN",
+                    "USER",
+                    "MANAGER"
+                ]
+            },
+            "ValidationErrorException": {
+                "properties": {
+                    "success": {
+                        "description": "Class ValidationErrorException",
+                        "type": "boolean",
+                        "default": false
+                    },
+                    "message": {
+                        "type": "string"
+                    },
+                    "code": {
+                        "type": "integer",
+                        "default": 422
                     }
                 },
                 "type": "object"
             },
-            "UpdateBrandRequest": {
+            "RestoreProductRequest": {
                 "required": [
-                    "name"
+                    "id"
                 ],
                 "properties": {
-                    "name": {
-                        "description": "Brand name",
-                        "type": "string",
-                        "maxLength": 255
-                    }
-                },
-                "type": "object"
-            },
-            "StoreCategoryRequest": {
-                "required": [
-                    "name"
-                ],
-                "properties": {
-                    "name": {
-                        "description": "Category name",
-                        "type": "string",
-                        "maxLength": 255
-                    }
-                },
-                "type": "object"
-            },
-            "UpdateCategoryRequest": {
-                "required": [
-                    "name"
-                ],
-                "properties": {
-                    "name": {
-                        "description": "Category name",
-                        "type": "string",
-                        "maxLength": 255
+                    "id": {
+                        "description": "Products list for restore",
+                        "type": "array",
+                        "items": {
+                            "type": "integer"
+                        }
                     }
                 },
                 "type": "object"
@@ -604,6 +1372,306 @@
                         "type": "number",
                         "maximum": 100,
                         "minimum": 0
+                    }
+                },
+                "type": "object"
+            },
+            "ForgotPasswordRequest": {
+                "required": [
+                    "email"
+                ],
+                "properties": {
+                    "email": {
+                        "description": "User email",
+                        "type": "string",
+                        "maxLength": 100
+                    }
+                },
+                "type": "object"
+            },
+            "LoginRequest": {
+                "required": [
+                    "email",
+                    "password"
+                ],
+                "properties": {
+                    "email": {
+                        "description": "User email",
+                        "type": "email",
+                        "maxLength": 100
+                    },
+                    "password": {
+                        "description": "User password",
+                        "type": "string",
+                        "maxLength": 50
+                    },
+                    "remeber_me": {
+                        "description": "Remember me",
+                        "type": "boolean"
+                    }
+                },
+                "type": "object"
+            },
+            "RegisterRequest": {
+                "required": [
+                    "first_name",
+                    "last_name",
+                    "email",
+                    "password",
+                    "password_confirmation"
+                ],
+                "properties": {
+                    "first_name": {
+                        "description": "User first name",
+                        "type": "string",
+                        "maxLength": 50
+                    },
+                    "last_name": {
+                        "description": "User last name",
+                        "type": "string",
+                        "maxLength": 50
+                    },
+                    "email": {
+                        "description": "User email",
+                        "type": "string",
+                        "maxLength": 100
+                    },
+                    "password": {
+                        "description": "User password",
+                        "type": "string",
+                        "maxLength": 50
+                    },
+                    "password_confirmation": {
+                        "description": "User password confirmation",
+                        "type": "string",
+                        "maxLength": 50
+                    }
+                },
+                "type": "object"
+            },
+            "ResetPasswordRequest": {
+                "required": [
+                    "token",
+                    "password",
+                    "password_confirmation"
+                ],
+                "properties": {
+                    "token": {
+                        "description": "Token from email",
+                        "type": "string",
+                        "maxLength": 100
+                    },
+                    "password": {
+                        "description": "User password",
+                        "type": "string",
+                        "maxLength": 50
+                    },
+                    "password_confirmation": {
+                        "description": "User password confirmation",
+                        "type": "string",
+                        "maxLength": 50
+                    }
+                },
+                "type": "object"
+            },
+            "ResetVerifyEmailRequest": {
+                "required": [
+                    "email"
+                ],
+                "properties": {
+                    "email": {
+                        "description": "User email",
+                        "type": "string",
+                        "maxLength": 100
+                    }
+                },
+                "type": "object"
+            },
+            "VerifyEmailRequest": {
+                "required": [
+                    "id",
+                    "token"
+                ],
+                "properties": {
+                    "id": {
+                        "description": "User id",
+                        "type": "integer"
+                    },
+                    "token": {
+                        "description": "Verify token",
+                        "type": "string",
+                        "maxLength": 100
+                    }
+                },
+                "type": "object"
+            },
+            "RestoreBrandRequest": {
+                "required": [
+                    "id"
+                ],
+                "properties": {
+                    "id": {
+                        "description": "Brands list for restore",
+                        "type": "array",
+                        "items": {
+                            "type": "integer"
+                        }
+                    }
+                },
+                "type": "object"
+            },
+            "StoreBrandRequest": {
+                "required": [
+                    "name"
+                ],
+                "properties": {
+                    "name": {
+                        "description": "Brand name",
+                        "type": "string",
+                        "maxLength": 255
+                    }
+                },
+                "type": "object"
+            },
+            "UpdateBrandRequest": {
+                "required": [
+                    "name"
+                ],
+                "properties": {
+                    "name": {
+                        "description": "Brand name",
+                        "type": "string",
+                        "maxLength": 255
+                    }
+                },
+                "type": "object"
+            },
+            "RestoreCategoryRequest": {
+                "required": [
+                    "id"
+                ],
+                "properties": {
+                    "id": {
+                        "description": "Categories list for restore",
+                        "type": "array",
+                        "items": {
+                            "type": "integer"
+                        }
+                    }
+                },
+                "type": "object"
+            },
+            "StoreCategoryRequest": {
+                "required": [
+                    "name"
+                ],
+                "properties": {
+                    "name": {
+                        "description": "Category name",
+                        "type": "string",
+                        "maxLength": 255
+                    }
+                },
+                "type": "object"
+            },
+            "UpdateCategoryRequest": {
+                "required": [
+                    "name"
+                ],
+                "properties": {
+                    "name": {
+                        "description": "Category name",
+                        "type": "string",
+                        "maxLength": 255
+                    }
+                },
+                "type": "object"
+            },
+            "ProfilePasswordRequest": {
+                "required": [
+                    "current_password",
+                    "password",
+                    "password_confirmation"
+                ],
+                "properties": {
+                    "current_password": {
+                        "description": "Current password from user",
+                        "type": "string",
+                        "maxLength": 50
+                    },
+                    "new_password": {
+                        "description": "New password",
+                        "type": "string",
+                        "maxLength": 50
+                    },
+                    "new_password_confirmation": {
+                        "description": "New password confirmation",
+                        "type": "string",
+                        "maxLength": 50
+                    }
+                },
+                "type": "object"
+            },
+            "UpdateProfileRequest": {
+                "required": [
+                    "name"
+                ],
+                "properties": {
+                    "first_name": {
+                        "description": "Class UpdateProfileRequest",
+                        "type": "string",
+                        "maxLength": 50
+                    },
+                    "last_name": {
+                        "type": "string",
+                        "maxLength": 50
+                    },
+                    "email": {
+                        "type": "string",
+                        "maxLength": 100
+                    },
+                    "phone": {
+                        "type": "string",
+                        "maxLength": 15
+                    },
+                    "city": {
+                        "type": "string",
+                        "maxLength": 30
+                    },
+                    "state": {
+                        "type": "string",
+                        "maxLength": 30
+                    },
+                    "zip": {
+                        "type": "string",
+                        "maxLength": 6
+                    },
+                    "country": {
+                        "type": "string",
+                        "maxLength": 30
+                    },
+                    "street": {
+                        "type": "string",
+                        "maxLength": 30
+                    },
+                    "apartment": {
+                        "type": "string",
+                        "maxLength": 30
+                    },
+                    "as_delivery_address": {
+                        "type": "boolean"
+                    }
+                },
+                "type": "object"
+            },
+            "RefreshTokenResource": {
+                "properties": {
+                    "status": {
+                        "description": "Class RefreshTokenResource",
+                        "type": "string"
+                    },
+                    "access_token": {
+                        "type": "string"
                     }
                 },
                 "type": "object"
@@ -703,6 +1771,90 @@
                     }
                 },
                 "type": "object"
+            },
+            "SuccessResource": {
+                "properties": {
+                    "status": {
+                        "description": "Class SuccessResource",
+                        "type": "string",
+                        "default": "success"
+                    },
+                    "message": {
+                        "type": "string",
+                        "default": "Success"
+                    },
+                    "code": {
+                        "type": "integer",
+                        "default": 200
+                    }
+                },
+                "type": "object"
+            },
+            "ProfileResource": {
+                "properties": {
+                    "id": {
+                        "description": "Class UserResource",
+                        "type": "integer"
+                    },
+                    "first_name": {
+                        "type": "string"
+                    },
+                    "last_name": {
+                        "type": "string"
+                    },
+                    "email": {
+                        "type": "string"
+                    },
+                    "phone": {
+                        "type": "string"
+                    },
+                    "city": {
+                        "type": "string"
+                    },
+                    "state": {
+                        "type": "string"
+                    },
+                    "zip": {
+                        "type": "string"
+                    },
+                    "country": {
+                        "type": "string"
+                    },
+                    "street": {
+                        "type": "string"
+                    },
+                    "apartment": {
+                        "type": "string"
+                    },
+                    "as_delivery_address": {
+                        "type": "string"
+                    },
+                    "role": {
+                        "type": "string"
+                    }
+                },
+                "type": "object"
+            },
+            "UserResource": {
+                "properties": {
+                    "id": {
+                        "description": "Class UserResource",
+                        "type": "integer"
+                    },
+                    "first_name": {
+                        "type": "string"
+                    },
+                    "last_name": {
+                        "type": "string"
+                    },
+                    "email": {
+                        "type": "string"
+                    },
+                    "role": {
+                        "type": "string"
+                    }
+                },
+                "type": "object"
             }
         },
         "securitySchemes": {
@@ -715,8 +1867,92 @@
     },
     "tags": [
         {
-            "name": "App\\Http\\Controllers\\Api\\Product",
+            "name": "BrandController",
+            "description": "Admin Brand endpoints"
+        },
+        {
+            "name": "CategoryController",
+            "description": "Admin Category endpoints"
+        },
+        {
+            "name": "OrderAddressController",
+            "description": "Admin Order Address endpoints"
+        },
+        {
+            "name": "OrderController",
+            "description": "Admin Order endpoints"
+        },
+        {
+            "name": "OrderItemsController",
+            "description": "Admin Order Item endpoints"
+        },
+        {
+            "name": "OrderPaymentController",
+            "description": "Admin Order Payment endpoints"
+        },
+        {
+            "name": "PermissionController",
+            "description": "Admin Permission endpoints"
+        },
+        {
+            "name": "ProductController",
+            "description": "Admin product endpoints"
+        },
+        {
+            "name": "RoleController",
+            "description": "Admin Role endpoints"
+        },
+        {
+            "name": "UserController",
+            "description": "Admin User endpoints"
+        },
+        {
+            "name": "ForgotPasswordController",
+            "description": "Forgot Password endpoints"
+        },
+        {
+            "name": "LoginController",
+            "description": "Login endpoints"
+        },
+        {
+            "name": "LogoutController",
+            "description": "Logout endpoints"
+        },
+        {
+            "name": "RegistrationController",
+            "description": "Registration endpoints"
+        },
+        {
+            "name": "ResetPasswordController",
+            "description": "Reset Password endpoints"
+        },
+        {
+            "name": "ResetVerifyEmailController",
+            "description": "Reset verify email endpoints"
+        },
+        {
+            "name": "VerifyEmailController",
+            "description": "Verify email endpoints"
+        },
+        {
+            "name": "BrandController",
+            "description": "Brand endpoints"
+        },
+        {
+            "name": "CategoryController",
+            "description": "Category endpoints"
+        },
+        {
+            "name": "OrderController",
+            "description": "Order endpoints"
+        },
+        {
+            "name": "ProductController",
             "description": "Product endpoints"
+        },
+        {
+            "name": "ProfileController",
+            "description": "Profile endpoints"
         }
     ]
 }

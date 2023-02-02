@@ -8,11 +8,19 @@ use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 use JsonSerializable;
 use Symfony\Component\HttpFoundation\Response as ResponseAlias;
+use OpenApi\Attributes as OA;
 
 /**
  * Class SuccessResource
  * @package App\Http\Resources
  */
+#[OA\Schema(
+    properties: [
+        new OA\Property('status', type: 'string', default: 'success'),
+        new OA\Property('message', type: 'string', default: 'Success'),
+        new OA\Property('code', type: 'integer', default: ResponseAlias::HTTP_OK),
+    ]
+)]
 class SuccessResource extends JsonResource
 {
     /**

@@ -54,7 +54,7 @@
             "@php artisan key:generate --ansi"
         ],
         "swagger-generate-docs": [
-            "@php artisan openapi:generate"
+            "@php artisan l5-swagger:generate"
         ]
     },
     "extra": {
