@@ -13,7 +13,7 @@ use OpenApi\Attributes as OA;
  * Class PermissionController
  * @package App\Http\Controllers\Api\Admin
  */
-#[OA\Tag(name: 'PermissionController', description: 'Admin Permission endpoints')]
+#[OA\Tag(name: 'Permission', description: 'Admin Permission endpoints')]
 #[Middleware(['auth:sanctum', 'role:admin,manager'])]
 #[Prefix('admin')]
 #[Where('permission', '[0-9]+')]

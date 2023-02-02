@@ -17,7 +17,7 @@ use Spatie\RouteAttributes\Attributes\Post;
  * Class VerifyEmailController
  * @package App\Http\Controllers\Api
  */
-#[OA\Tag(name: 'VerifyEmailController', description: 'Verify email endpoints')]
+#[OA\Tag(name: 'VerifyEmail', description: 'Verify email endpoints')]
 class VerifyEmailController extends AppController
 {
     /**
@@ -33,7 +33,7 @@ class VerifyEmailController extends AppController
         requestBody: new OA\RequestBody(
             content: new OA\JsonContent(ref: '#/components/schemas/VerifyEmailRequest')
         ),
-        tags: ['Auth'],
+        tags: ['VerifyEmail'],
         responses: [
             new OA\Response(
                 response: '200',

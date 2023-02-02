@@ -13,7 +13,7 @@ use OpenApi\Attributes as OA;
  * Class OrderController
  * @package App\Http\Controllers\Api\Admin
  */
-#[OA\Tag(name: 'OrderController', description: 'Admin Order endpoints')]
+#[OA\Tag(name: 'AdminOrder', description: 'Admin Order endpoints')]
 #[Middleware(['auth:sanctum', 'role:admin,manager'])]
 #[Prefix('admin')]
 #[Where('order', '[0-9]+')]

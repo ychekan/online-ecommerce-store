@@ -17,7 +17,7 @@ use Spatie\RouteAttributes\Attributes\Post;
  * Class ResetPasswordController
  * @package App\Http\Controllers\Api\Auth
  */
-#[OA\Tag(name: 'ResetPasswordController', description: 'Reset Password endpoints')]
+#[OA\Tag(name: 'ResetPassword', description: 'Reset Password endpoints')]
 class ResetPasswordController extends AppController
 {
     /**
@@ -33,7 +33,7 @@ class ResetPasswordController extends AppController
         requestBody: new OA\RequestBody(
             content: new OA\JsonContent(ref: '#/components/schemas/ResetPasswordRequest')
         ),
-        tags: ['Auth'],
+        tags: ['ResetPassword'],
         responses: [
             new OA\Response(
                 response: '200',

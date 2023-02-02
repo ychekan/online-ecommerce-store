@@ -238,7 +238,7 @@
             },
             "post": {
                 "tags": [
-                    "Category"
+                    "AdminCategory"
                 ],
                 "summary": "Store a newly created Category.",
                 "operationId": "810e8b9fee1619d4229208cb942c486a",
@@ -273,7 +273,7 @@
         "/api/admin/categories/{id}": {
             "get": {
                 "tags": [
-                    "Category"
+                    "AdminCategory"
                 ],
                 "summary": "Display the specified Category by ID.",
                 "operationId": "dd1a3fd24575b2b12b6c8235fd29de4e",
@@ -305,7 +305,7 @@
             },
             "put": {
                 "tags": [
-                    "Category"
+                    "AdminCategory"
                 ],
                 "summary": "Update the specified Category by ID.",
                 "operationId": "6b267ce72356fa2805c1484f48318133",
@@ -346,7 +346,7 @@
             },
             "delete": {
                 "tags": [
-                    "Category"
+                    "AdminCategory"
                 ],
                 "summary": "Remove the specified Category by ID.",
                 "operationId": "6ee6ff59b8676a6da057579bba1331ad",
@@ -660,7 +660,7 @@
         "/api/forgot-password": {
             "post": {
                 "tags": [
-                    "Auth"
+                    "ForgotPassword"
                 ],
                 "operationId": "4a3e9135aa2e26d12d718f591de1fdce",
                 "requestBody": {
@@ -697,7 +697,7 @@
         "/api/login": {
             "post": {
                 "tags": [
-                    "Auth"
+                    "Login"
                 ],
                 "summary": "Login user.",
                 "operationId": "1ede4abe4ada89bc305f8cb59117f0c0",
@@ -743,7 +743,7 @@
         "/api/logout": {
             "post": {
                 "tags": [
-                    "Auth"
+                    "Logout"
                 ],
                 "operationId": "1713bea214c8ec7cff47023cf266ad88",
                 "responses": {
@@ -771,7 +771,7 @@
         "/api/register": {
             "post": {
                 "tags": [
-                    "Auth"
+                    "Registration"
                 ],
                 "operationId": "5f0e95584653d7bbeaae9c3e51a58d4a",
                 "requestBody": {
@@ -816,7 +816,7 @@
         "/api/reset-password": {
             "post": {
                 "tags": [
-                    "Auth"
+                    "ResetPassword"
                 ],
                 "operationId": "57a07a3f4686d599373f7b77a3169c99",
                 "requestBody": {
@@ -853,7 +853,7 @@
         "/api/reset-verify-email": {
             "post": {
                 "tags": [
-                    "Auth"
+                    "ResetVerifyEmail"
                 ],
                 "operationId": "8974fcde845ab9abb48a7576ea952e0c",
                 "requestBody": {
@@ -885,7 +885,7 @@
         "/api/verify-email": {
             "post": {
                 "tags": [
-                    "Auth"
+                    "VerifyEmail"
                 ],
                 "summary": "Verify email.",
                 "operationId": "050369241908a015171cf19558f0b89c",
@@ -1867,91 +1867,91 @@
     },
     "tags": [
         {
-            "name": "BrandController",
+            "name": "AdminBrand",
             "description": "Admin Brand endpoints"
         },
         {
-            "name": "CategoryController",
+            "name": "AdminCategory",
             "description": "Admin Category endpoints"
         },
         {
-            "name": "OrderAddressController",
+            "name": "AdminOrderAddress",
             "description": "Admin Order Address endpoints"
         },
         {
-            "name": "OrderController",
+            "name": "AdminOrder",
             "description": "Admin Order endpoints"
         },
         {
-            "name": "OrderItemsController",
+            "name": "OrderItems",
             "description": "Admin Order Item endpoints"
         },
         {
-            "name": "OrderPaymentController",
+            "name": "OrderPayment",
             "description": "Admin Order Payment endpoints"
         },
         {
-            "name": "PermissionController",
+            "name": "Permission",
             "description": "Admin Permission endpoints"
         },
         {
-            "name": "ProductController",
+            "name": "AdminProduct",
             "description": "Admin product endpoints"
         },
         {
-            "name": "RoleController",
+            "name": "Role",
             "description": "Admin Role endpoints"
         },
         {
-            "name": "UserController",
+            "name": "AdminUser",
             "description": "Admin User endpoints"
         },
         {
-            "name": "ForgotPasswordController",
+            "name": "ForgotPassword",
             "description": "Forgot Password endpoints"
         },
         {
-            "name": "LoginController",
+            "name": "Login",
             "description": "Login endpoints"
         },
         {
-            "name": "LogoutController",
+            "name": "Logout",
             "description": "Logout endpoints"
         },
         {
-            "name": "RegistrationController",
+            "name": "Registration",
             "description": "Registration endpoints"
         },
         {
-            "name": "ResetPasswordController",
+            "name": "ResetPassword",
             "description": "Reset Password endpoints"
         },
         {
-            "name": "ResetVerifyEmailController",
+            "name": "ResetVerifyEmail",
             "description": "Reset verify email endpoints"
         },
         {
-            "name": "VerifyEmailController",
+            "name": "VerifyEmail",
             "description": "Verify email endpoints"
         },
         {
-            "name": "BrandController",
+            "name": "Brand",
             "description": "Brand endpoints"
         },
         {
-            "name": "CategoryController",
+            "name": "Category",
             "description": "Category endpoints"
         },
         {
-            "name": "OrderController",
+            "name": "Order",
             "description": "Order endpoints"
         },
         {
-            "name": "ProductController",
+            "name": "Product",
             "description": "Product endpoints"
         },
         {
-            "name": "ProfileController",
+            "name": "Profile",
             "description": "Profile endpoints"
         }
     ]

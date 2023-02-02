@@ -13,7 +13,7 @@ use OpenApi\Attributes as OA;
  * Class RoleController
  * @package App\Http\Controllers\Api\Admin
  */
-#[OA\Tag(name: 'RoleController', description: 'Admin Role endpoints')]
+#[OA\Tag(name: 'Role', description: 'Admin Role endpoints')]
 #[Middleware(['auth:sanctum', 'role:admin,manager'])]
 #[Prefix('admin')]
 #[Where('role', '[0-9]+')]

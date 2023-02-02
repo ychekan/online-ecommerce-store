@@ -15,7 +15,7 @@ use Spatie\RouteAttributes\Attributes\Post;
  * Class LogoutController
  * @package App\Http\Controllers\Api\Auth
  */
-#[OA\Tag(name: 'LogoutController', description: 'Logout endpoints')]
+#[OA\Tag(name: 'Logout', description: 'Logout endpoints')]
 class LogoutController extends AppController
 {
     /**
@@ -27,7 +27,7 @@ class LogoutController extends AppController
     #[OA\Post(
         path: '/api/logout',
         security: [['BearerAuth' => []]],
-        tags: ['Auth'],
+        tags: ['Logout'],
         responses: [
             new OA\Response(
                 response: '200',

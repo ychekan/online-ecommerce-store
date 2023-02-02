@@ -6,7 +6,7 @@ use App\Http\Controllers\AppController;
 use Illuminate\Http\Request;
 use OpenApi\Attributes as OA;
 
-#[OA\Tag(name: 'OrderController', description: 'Order endpoints')]
+#[OA\Tag(name: 'Order', description: 'Order endpoints')]
 class OrderController extends AppController
 {
     // todo: Policy

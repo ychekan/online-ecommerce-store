@@ -33,7 +33,7 @@ use Spatie\RouteAttributes\Attributes\Where;
  * Class BrandController
  * @package App\Http\Controllers\Api\Admin
  */
-#[OA\Tag(name: 'BrandController', description: 'Admin Brand endpoints')]
+#[OA\Tag(name: 'AdminBrand', description: 'Admin Brand endpoints')]
 #[Middleware(['auth:sanctum', 'role:admin,manager'])]
 #[Prefix('admin')]
 #[Where('brand', '[0-9]+')]
@@ -81,6 +81,7 @@ class BrandController extends AppController
      * @param StoreBrandRequest $request
      * @param CreateBrandService $createBrandService
      * @return BrandResource
+     * @throws ValidationException
      */
     #[OA\Post(
         path: '/api/admin/brands',

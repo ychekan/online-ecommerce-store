@@ -34,7 +34,7 @@ use Spatie\RouteAttributes\Attributes\Where;
  * Class CategoryController
  * @package App\Http\Controllers\Api\Admin
  */
-#[OA\Tag(name: 'CategoryController', description: 'Admin Category endpoints')]
+#[OA\Tag(name: 'AdminCategory', description: 'Admin Category endpoints')]
 #[Middleware(['auth:sanctum', 'role:admin,manager'])]
 #[Prefix('admin')]
 #[Where('category', '[0-9]+')]
@@ -81,6 +81,7 @@ class CategoryController extends AppController
      * @param StoreCategoryRequest $request
      * @param CreateCategoryService $createCategoryService
      * @return CategoryResource
+     * @throws ValidationException
      */
     #[OA\Post(
         path: '/api/admin/categories',
@@ -88,7 +89,7 @@ class CategoryController extends AppController
         requestBody: new OA\RequestBody(
             content: new OA\JsonContent(ref: '#/components/schemas/StoreCategoryRequest')
         ),
-        tags: ['Category'],
+        tags: ['AdminCategory'],
         responses: [
             new OA\Response(
                 response: '201',
@@ -118,7 +119,7 @@ class CategoryController extends AppController
     #[OA\Get(
         path: '/api/admin/categories/{id}',
         security: [['BearerAuth' => []]],
-        tags: ['Category'],
+        tags: ['AdminCategory'],
         parameters: [
             new OA\Parameter(
                 name: 'id',
@@ -156,7 +157,7 @@ class CategoryController extends AppController
         requestBody: new OA\RequestBody(
             content: new OA\JsonContent(ref: '#/components/schemas/UpdateCategoryRequest')
         ),
-        tags: ['Category'],
+        tags: ['AdminCategory'],
         parameters: [
             new OA\Parameter(
                 name: 'id',
@@ -198,7 +199,7 @@ class CategoryController extends AppController
     #[OA\Delete(
         path: '/api/admin/categories/{id}',
         security: [['BearerAuth' => []]],
-        tags: ['Category'],
+        tags: ['AdminCategory'],
         parameters: [
             new OA\Parameter(
                 name: 'id',
