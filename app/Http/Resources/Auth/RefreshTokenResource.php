@@ -3,12 +3,11 @@ declare(strict_types=1);
 
 namespace App\Http\Resources\Auth;
 
-use App\Http\Resources\User\ProfileResource;
 use Illuminate\Http\Resources\Json\JsonResource;
 use OpenApi\Attributes as OA;
 
 /**
- * Class LoginResource
+ * Class RefreshTokenResource
  * @package App\Http\Resources\Auth
  */
 #[OA\Schema(

@@ -7,7 +7,10 @@ use App\Exceptions\ValidationErrorException;
 use App\Http\Requests\Auth\LoginRequest;
 use App\Models\User;
 use App\Services\AppService;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Validation\ValidationException;
+
 /**
  * Class LoginService
  * @package App\Services\Auth
@@ -17,10 +20,11 @@ class LoginService extends AppService
     /**
      * @param array $credentials
      * @param LoginRequest $request
-     * @return array
+     * @return User|null
      * @throws ValidationErrorException
+     * @throws ValidationException
      */
-    public function run(array $credentials, LoginRequest $request): array
+    public function run(array $credentials, LoginRequest $request): User|null
     {
         return $this->login(
             $credentials,
@@ -31,10 +35,10 @@ class LoginService extends AppService
     /**
      * @param array $credentials
      * @param LoginRequest $request
-     * @return array
+     * @return User|null
      * @throws ValidationErrorException
      */
-    private function login(array $credentials, LoginRequest $request): array
+    private function login(array $credentials, LoginRequest $request): User|null
     {
         $user = User::firstWhere('email', $credentials['email']);
 
@@ -43,14 +47,12 @@ class LoginService extends AppService
             throw new ValidationErrorException(__('auth.not_valid_credentials'));
         }
 
-        $token = $request->filled('remember_me')
-            ? $user->createTokenWithExpirationTime(env('APP_NAME'), ['remember'])->plainTextToken // Remember me
-            : $user->createToken(env('APP_NAME'))->plainTextToken; // Without remember me
+        if (Auth::attempt($credentials)) {
+            $request->session()->regenerate();
 
-        return [
-            'user' => $user,
-            'token' => $token
-        ];
+            return $user;
+        }
+        return null;
     }
 
 

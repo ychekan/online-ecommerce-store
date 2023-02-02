@@ -3,12 +3,12 @@ declare(strict_types=1);
 
 namespace App\Services\Auth;
 
-use App\DTO\Auth\RegisterDTO;
 use App\Enums\UserRoleEnum;
 use App\Models\User;
 use App\Notifications\RegisterNotification;
 use App\Services\AppService;
-use Illuminate\Support\Facades\Notification;
+use App\Services\Verify\ConfirmTokenService;
+use Illuminate\Validation\ValidationException;
 
 /**
  * Class RegistrationService
@@ -17,8 +17,16 @@ use Illuminate\Support\Facades\Notification;
 class RegistrationService extends AppService
 {
     /**
+     * RegistrationService constructor.
+     */
+    public function __construct(private readonly ConfirmTokenService $confirmEmailTokenService)
+    {
+    }
+
+    /**
      * @param array $registerDTO
      * @return User
+     * @throws ValidationException
      */
     public function run(array $registerDTO): User
     {
@@ -28,21 +36,20 @@ class RegistrationService extends AppService
     /**
      * @param array $registerDTO
      * @return User
+     * @throws ValidationException
      */
     public function register(array $registerDTO): User
     {
-//        $user = User::create($registerDTO);
-//
-//        $user->assignRole(UserRoleEnum::USER->value);
+        $user = User::create($registerDTO);
 
-//        Notification::send($user, new RegisterNotification($user));
+        // Assign role by default for user
+        $user->assignRole(UserRoleEnum::USER->value);
 
-        $user = User::find(11);
+        // Generate token for confirm email
+        $this->confirmEmailTokenService->createToken($user);
 
+        // Send email for confirm email
         $user->notify(new RegisterNotification());
-
-        // todo: Add send email verification
-        // todo: Add resend email verification
 
         return $user->refresh();
     }

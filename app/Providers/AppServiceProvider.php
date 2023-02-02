@@ -1,14 +1,18 @@
 <?php
+declare(strict_types=1);
 
 namespace App\Providers;
 
-use App\Models\PersonalAccessToken;
-use Carbon\Carbon;
 use Faker\Factory as FakerFactory;
 use Faker\Generator as FakerGenerator;
+use Illuminate\Auth\Notifications\ResetPassword;
+use Illuminate\Support\Facades\Config;
 use Illuminate\Support\ServiceProvider;
-use Laravel\Sanctum\Sanctum;
 
+/**
+ * Class AppServiceProvider
+ * @package App\Providers
+ */
 class AppServiceProvider extends ServiceProvider
 {
     /**
@@ -16,7 +20,7 @@ class AppServiceProvider extends ServiceProvider
      *
      * @return void
      */
-    public function register()
+    public function register(): void
     {
         $this->app->singleton(FakerGenerator::class, function ($app) {
             return FakerFactory::create($app['config']->get('app.faker_locale', 'en_US'));
@@ -28,16 +32,12 @@ class AppServiceProvider extends ServiceProvider
      *
      * @return void
      */
-    public function boot()
+    public function boot(): void
     {
-        Sanctum::usePersonalAccessTokenModel(PersonalAccessToken::class);
+        ResetPassword::createUrlUsing(function ($notifiable, $token) {
+            $url = Config::get('app.url_frontend');
 
-        Sanctum::authenticateAccessTokensUsing(function (PersonalAccessToken $token, $isValid) {
-            if ($isValid ?: $token?->expired_at->isFuture()) {
-                return true;
-            }
-            $token->delete();
-            return false;
+            return "{$url}/reset-password/{$token}";
         });
     }
 }

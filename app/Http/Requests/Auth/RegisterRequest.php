@@ -8,11 +8,11 @@ use Illuminate\Validation\Rules\Password;
 use OpenApi\Attributes as OA;
 
 /**
- * Class LoginRequest
+ * Class RegisterRequest
  * @package App\Http\Requests\Auth
  */
 #[OA\Schema(
-    required: ['name'],
+    required: ['first_name', 'last_name', 'email', 'password', 'password_confirmation'],
     properties: [
         new OA\Property('first_name', description: 'User first name', type: 'string', maxLength: 50),
         new OA\Property('last_name', description: 'User last name', type: 'string', maxLength: 50),

@@ -17,12 +17,10 @@ use Spatie\RouteAttributes\Attributes\Post;
  * Class RegistrationController
  * @package App\Http\Controllers\Api\Auth
  */
-#[OA\Tag(name: 'App\Http\Controllers\Api\Auth\RegistrationController', description: 'Registration endpoints')]
+#[OA\Tag(name: 'RegistrationController', description: 'Registration endpoints')]
 class RegistrationController extends AppController
 {
     /**
-     * Register user
-     *
      * @param RegisterRequest $request
      * @param RegistrationService $registrationService
      * @return UserResource|JsonResponse
@@ -42,6 +40,16 @@ class RegistrationController extends AppController
                     new OA\JsonContent(
                         type: 'array',
                         items: new OA\Items(ref: '#/components/schemas/UserResource')
+                    )
+                ]
+            ),
+            new OA\Response(
+                response: '422',
+                description: 'Validation error',
+                content: [
+                    new OA\JsonContent(
+                        type: 'array',
+                        items: new OA\Items(ref: '#/components/schemas/ValidationErrorException')
                     )
                 ]
             )

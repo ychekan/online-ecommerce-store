@@ -3,7 +3,6 @@ declare(strict_types=1);
 
 namespace App\Services\User;
 
-use App\DTO\Profile\UpdateProfileDTO;
 use App\Models\User;
 use App\Services\AppService;
 use Illuminate\Support\Facades\Auth;
@@ -24,12 +23,13 @@ class UpdateProfileService extends AppService
     }
 
     /**
+     * Update profile
+     *
      * @param array $profileDTO
      * @return User
      */
     private function updateProfile(array $profileDTO): User
     {
-        // update profile
         $user = Auth::user();
 
         $user

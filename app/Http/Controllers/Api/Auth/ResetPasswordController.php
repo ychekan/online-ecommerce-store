@@ -4,9 +4,12 @@ declare(strict_types=1);
 namespace App\Http\Controllers\Api\Auth;
 
 use App\DTO\Auth\ResetPasswordDTO;
+use App\Exceptions\ValidationErrorException;
 use App\Http\Controllers\AppController;
 use App\Http\Requests\Auth\ResetPasswordRequest;
+use App\Http\Resources\SuccessResource;
 use App\Services\Auth\ResetPasswordService;
+use Illuminate\Validation\ValidationException;
 use OpenApi\Attributes as OA;
 use Spatie\RouteAttributes\Attributes\Post;
 
@@ -14,16 +17,19 @@ use Spatie\RouteAttributes\Attributes\Post;
  * Class ResetPasswordController
  * @package App\Http\Controllers\Api\Auth
  */
-#[OA\Tag(name: 'App\Http\Controllers\Api\Auth\ResetPasswordController', description: 'Reset Password endpoints')]
+#[OA\Tag(name: 'ResetPasswordController', description: 'Reset Password endpoints')]
 class ResetPasswordController extends AppController
 {
     /**
-     * Reset password
-     *
-     * @return void
+     * @param ResetPasswordRequest $request
+     * @param ResetPasswordService $resetPasswordService
+     * @return SuccessResource
+     * @throws ValidationErrorException
+     * @throws ValidationException
      */
     #[OA\Post(
-        path: '/api/password/reset',
+        path: '/api/reset-password',
+        security: [['BearerAuth' => []]],
         requestBody: new OA\RequestBody(
             content: new OA\JsonContent(ref: '#/components/schemas/ResetPasswordRequest')
         ),
@@ -39,28 +45,17 @@ class ResetPasswordController extends AppController
                     )
                 ]
             ),
-            new OA\Response(
-                response: '422',
-                description: 'Validation error',
-                content: [
-                    new OA\JsonContent(
-                        type: 'array',
-                        items: new OA\Items(ref: '#/components/schemas/ValidationErrorException')
-                    )
-                ]
-            )
         ]
     )]
-    #[Post('password/reset')]
+    #[Post('reset-password')]
     public function __invoke(
         ResetPasswordRequest $request,
         ResetPasswordService $resetPasswordService
-    )
+    ): SuccessResource
     {
-        $result = $resetPasswordService->run(
+        $resetPasswordService->run(
             ResetPasswordDTO::validate($request->validated())
         );
-
-        return $this->success($result);
+        return new SuccessResource(__('success.password_will_be_reset_success'));
     }
 }

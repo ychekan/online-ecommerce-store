@@ -26,6 +26,7 @@ use Illuminate\Support\Str;
  * @property \Illuminate\Support\Carbon|null $deleted_at
  *
  * @method static create(array $toArray)
+ * @method static filter(array $all)
  */
 class Category extends Model
 {
@@ -79,6 +80,7 @@ class Category extends Model
         );
     }
 
+    // Relationships
     /**
      * Get the post's image.
      */

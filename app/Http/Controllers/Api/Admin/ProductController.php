@@ -1,4 +1,5 @@
 <?php
+declare(strict_types=1);
 
 namespace App\Http\Controllers\Api\Admin;
 
@@ -105,7 +106,9 @@ class ProductController extends AppController
     ): ProductResource
     {
         return new ProductResource(
-            $createProductService->run(StoreProductDTO::from($request->validated()))
+            $createProductService->run(
+                StoreProductDTO::validate($request->validated())
+            )
         );
     }
 

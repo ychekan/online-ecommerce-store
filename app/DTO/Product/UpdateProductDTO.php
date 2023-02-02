@@ -14,11 +14,11 @@ use Spatie\LaravelData\Attributes\Validation\Max;
 final class UpdateProductDTO extends AbstractDTO
 {
     /**
-     * @param string|null $name
-     * @param float|null $price
-     * @param string|null $description
-     * @param float|null $available
-     * @param float|null $sale
+     * @param ?string $name
+     * @param ?float $price
+     * @param ?string $description
+     * @param ?float $available
+     * @param ?float $sale
      */
     public function __construct(
         /**

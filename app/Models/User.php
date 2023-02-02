@@ -4,12 +4,15 @@ declare(strict_types=1);
 namespace App\Models;
 
 use App\Traits\PaginationTrait;
-use App\Traits\SanctumHasApiTokens;
+use Illuminate\Auth\Notifications\ResetPassword;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\Hash;
 use Laravel\Sanctum\HasApiTokens;
 use Spatie\Permission\Traits\HasRoles;
@@ -38,12 +41,13 @@ use Spatie\Permission\Traits\HasRoles;
  * @property \Illuminate\Support\Carbon|null $deleted_at
  * @method static create(array $toArray)
  * @method static firstWhere(string $string, array|string|null $cookie)
+ * @method static findOrFail($user_id)
+ * @method static findByEmail(mixed $email)
  */
 class User extends Authenticatable implements MustVerifyEmail
 {
     use HasRoles;
     use HasApiTokens;
-    use SanctumHasApiTokens;
     use HasFactory;
     use Notifiable;
     use PaginationTrait;
@@ -98,5 +102,43 @@ class User extends Authenticatable implements MustVerifyEmail
         return Attribute::set(
             set: fn($value) => Hash::make($value),
         );
+    }
+
+    /**
+     * Send the password reset notification.
+     *
+     * @param  string  $token
+     * @return void
+     */
+    public function sendPasswordResetNotification($token): void
+    {
+        // The trick is first to instantiate the notification itself
+        $notification = new ResetPassword($token);
+        // Then use the createUrlUsing method
+        $notification->createUrlUsing(function ($token) {
+            return Config::get('app.frontend_url');
+        });
+        // Then you pass the notification
+        $this->notify($notification);
+    }
+
+    // Scopes
+    /**
+     * @param $query
+     * @param $email
+     * @return Model|HasOne|null
+     */
+    public function scopeFindByEmail($query, $email): Model|HasOne|null
+    {
+        return $query->where('email', $email)->first();
+    }
+
+    // Relationships
+    /**
+     * @return Model|HasOne|null
+     */
+    public function getVerificationToken(): Model|HasOne|null
+    {
+        return $this->hasOne(ConfirmEmailTokens::class, 'user_id', 'id')->first();
     }
 }

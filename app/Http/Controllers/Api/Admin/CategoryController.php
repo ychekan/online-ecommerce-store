@@ -41,7 +41,6 @@ use Spatie\RouteAttributes\Attributes\Where;
 class CategoryController extends AppController
 {
     // todo policy
-    // todo manual testing
 
     /**
      * Display a listing of the Categories.
@@ -104,7 +103,9 @@ class CategoryController extends AppController
         CreateCategoryService $createCategoryService
     ): CategoryResource {
         return new CategoryResource(
-            $createCategoryService->run(StoreCategoryDTO::from($request->validated()))
+            $createCategoryService->run(
+                StoreCategoryDTO::validate($request->validated())
+            )
         );
     }
 

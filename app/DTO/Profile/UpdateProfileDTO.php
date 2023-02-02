@@ -14,17 +14,17 @@ use Spatie\LaravelData\Attributes\Validation\Max;
 final class UpdateProfileDTO extends AbstractDTO
 {
     /**
-     * @param string|null $first_name
-     * @param string|null $last_name
-     * @param string|null $email
-     * @param string|null $phone
-     * @param string|null $city
-     * @param string|null $state
-     * @param string|null $zip
-     * @param string|null $country
-     * @param string|null $street
-     * @param string|null $apartment
-     * @param boolean|null $as_delivery_address
+     * @param ?string $first_name
+     * @param ?string $last_name
+     * @param ?string $email
+     * @param ?string $phone
+     * @param ?string $city
+     * @param ?string $state
+     * @param ?string $zip
+     * @param ?string $country
+     * @param ?string $street
+     * @param ?string $apartment
+     * @param ?boolean $as_delivery_address
      */
     public function __construct(
         #[Max(50)]

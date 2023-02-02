@@ -1,20 +1,22 @@
+## Simple Ecommerce Backend
+
 ## Plane:
 
 #### Auth/Controller
 
-[] Verify email
+[x] Verify email
 
-[] Reset password
+[x] Reset password
 
-[] Forgot password
+[x] Forgot password
 
-[] Reset verify email
+[x] Reset verify email
 
 #### User/Profile
 
-[] Change password
+[x] Change password
 
-[] Change email
+[x] Change email
 
 #### Upload file
 
@@ -34,7 +36,21 @@
 
 [] Get order
 
+[] Get orders list
+
 [] Delete order
+
+#### Wishlist
+
+[] Create wishlist
+
+[] Update wishlist
+
+[] Get wishlist
+
+[] Get wishlists list
+
+[] Delete wishlist
 
 #### Brand
 
@@ -63,7 +79,7 @@
 
 ## Admin:
 
-#### Test
+#### Main Controllers
 
 [] Order address crud
 

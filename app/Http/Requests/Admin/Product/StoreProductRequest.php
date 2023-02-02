@@ -8,7 +8,7 @@ use OpenApi\Attributes as OA;
 
 /**
  * Class StoreProductRequest
- * @package App\Http\Requests\Product
+ * @package App\Http\Requests\Admin\Product
  */
 #[OA\Schema(
     required: ['name', 'price'],

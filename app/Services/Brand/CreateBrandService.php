@@ -3,8 +3,6 @@ declare(strict_types=1);
 
 namespace App\Services\Brand;
 
-use App\DTO\Brand\StoreBrandDTO;
-use App\DTO\Product\StoreProductDTO;
 use App\Models\Brand;
 use App\Services\AppService;
 
@@ -15,20 +13,20 @@ use App\Services\AppService;
 class CreateBrandService extends AppService
 {
     /**
-     * @param StoreBrandDTO $brandDTO
+     * @param array $brandDTO
      * @return Brand|null
      */
-    public function run(StoreBrandDTO $brandDTO): Brand|null
+    public function run(array $brandDTO): Brand|null
     {
         return $this->createBrand($brandDTO);
     }
 
     /**
-     * @param StoreBrandDTO $brandDTO
+     * @param array $brandDTO
      * @return Brand|null
      */
-    private function createBrand(StoreBrandDTO $brandDTO): Brand|null
+    private function createBrand(array $brandDTO): Brand|null
     {
-        return Brand::create($brandDTO->toArray());
+        return Brand::create($brandDTO);
     }
 }

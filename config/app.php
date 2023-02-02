@@ -231,4 +231,10 @@ return [
 
     ],
 
+    /**
+     * Frontend link
+     */
+
+    'url_frontend' => env('URL_FRONTEND', 'localhost'),
+
 ];

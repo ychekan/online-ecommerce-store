@@ -3,10 +3,6 @@ declare(strict_types=1);
 
 namespace App\Services\Category;
 
-use App\DTO\Brand\StoreBrandDTO;
-use App\DTO\Category\StoreCategoryDTO;
-use App\DTO\Product\StoreProductDTO;
-use App\Models\Brand;
 use App\Models\Category;
 use App\Services\AppService;
 
@@ -17,20 +13,20 @@ use App\Services\AppService;
 class CreateCategoryService extends AppService
 {
     /**
-     * @param StoreCategoryDTO $categoryDTO
+     * @param array $categoryDTO
      * @return Category|null
      */
-    public function run(StoreCategoryDTO $categoryDTO): Category|null
+    public function run(array $categoryDTO): Category|null
     {
         return $this->createCategory($categoryDTO);
     }
 
     /**
-     * @param StoreCategoryDTO $categoryDTO
+     * @param array $categoryDTO
      * @return Category|null
      */
-    private function createCategory(StoreCategoryDTO $categoryDTO): Category|null
+    private function createCategory(array $categoryDTO): Category|null
     {
-        return Category::create($categoryDTO->toArray());
+        return Category::create($categoryDTO);
     }
 }

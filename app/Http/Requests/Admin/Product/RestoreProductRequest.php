@@ -6,8 +6,8 @@ use Illuminate\Foundation\Http\FormRequest;
 use OpenApi\Attributes as OA;
 
 /**
- * Class StoreProductRequest
- * @package App\Http\Requests\Product
+ * Class RestoreProductRequest
+ * @package App\Http\Requests\Admin\Product
  */
 #[OA\Schema(
     required: ['id'],

@@ -5,6 +5,10 @@ namespace App\Traits;
 
 use Illuminate\Http\Request;
 
+/**
+ * Trait PaginationTrait
+ * @package App\Traits
+ */
 trait PaginationTrait
 {
     /**

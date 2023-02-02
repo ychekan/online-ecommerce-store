@@ -16,6 +16,16 @@ use Symfony\Component\HttpFoundation\Response as ResponseAlias;
 class SuccessResource extends JsonResource
 {
     /**
+     * @var string|null $message
+     */
+    protected string|null $message;
+
+    public function __construct(string|null $message = null)
+    {
+        parent::__construct(null);
+        $this->message = $message;
+    }
+    /**
      * Transform the resource into an array.
      *
      * @param Request $request
@@ -25,6 +35,7 @@ class SuccessResource extends JsonResource
     {
         return [
             'status' => 'success',
+            'message' => $this->message ?? __('auth.success'),
             'code' => ResponseAlias::HTTP_OK,
         ];
     }

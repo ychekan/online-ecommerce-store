@@ -78,6 +78,7 @@ class Brand extends Model
         return 'slug';
     }
 
+    // Relationships
     /**
      * Get the brand images.
      */

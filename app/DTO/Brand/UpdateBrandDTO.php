@@ -14,14 +14,14 @@ use Spatie\LaravelData\Attributes\Validation\Unique;
 final class UpdateBrandDTO extends AbstractDTO
 {
     /**
-     * @param string|null $name
+     * @param ?string $name
      */
     public function __construct(
         /**
          * @var ?string Brand name
          */
         #[Max(255)]
-        #[Unique('categories', 'name')]// todo check this
+        #[Unique('categories', 'name')]
         public ?string $name = null,
     )
     {

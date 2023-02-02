@@ -21,7 +21,7 @@ final class StoreCategoryDTO extends AbstractDTO
          * @var string Category name
          */
         #[Max(255)]
-        #[Unique('categories', 'name')]// todo check this
+        #[Unique('categories', 'name')]
         public string $name,
     )
     {

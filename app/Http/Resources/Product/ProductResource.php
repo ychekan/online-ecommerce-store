@@ -6,7 +6,10 @@ namespace App\Http\Resources\Product;
 use App\Http\Resources\Brand\BrandResource;
 use App\Http\Resources\Category\CategoryResource;
 use App\Http\Resources\Image\ImageResource;
+use Illuminate\Contracts\Support\Arrayable;
+use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
+use JsonSerializable;
 use OpenApi\Attributes as OA;
 
 /**
@@ -43,10 +46,10 @@ class ProductResource extends JsonResource
     /**
      * Transform the resource into an array.
      *
-     * @param \Illuminate\Http\Request $request
-     * @return array|\Illuminate\Contracts\Support\Arrayable|\JsonSerializable
+     * @param Request $request
+     * @return array|Arrayable|JsonSerializable
      */
-    public function toArray($request)
+    public function toArray($request): array|JsonSerializable|Arrayable
     {
         return [
             "id" => $this->id,
