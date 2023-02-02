@@ -15,7 +15,7 @@ use OpenApi\Attributes as OA;
 #[OA\Schema(
     required: ['email', 'password'],
     properties: [
-        new OA\Property('email', description: 'User email', type: 'email', maxLength: 100),
+        new OA\Property('email', description: 'User email', type: 'string', maxLength: 100),
         new OA\Property('password', description: 'User password', type: 'string', maxLength: 50),
         new OA\Property('remeber_me', description: 'Remember me', type: 'boolean'),
     ]
