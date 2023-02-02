@@ -17,7 +17,6 @@ use Spatie\RouteAttributes\Attributes\Where;
  * Class BrandController
  * @package App\Http\Controllers\Api
  */
-#[OA\Tag(name: 'Brand', description: 'Brand endpoints')]
 #[Where('brand', '[a-z0-1\-]+')]
 class BrandController extends AppController
 {

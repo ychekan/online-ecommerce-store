@@ -21,7 +21,6 @@ use Spatie\RouteAttributes\Attributes\Put;
  * Class ProfileController
  * @package App\Http\Controllers\Api
  */
-#[OA\Tag(name: 'Profile', description: 'Profile endpoints')]
 #[Middleware(['auth:sanctum'])]
 class ProfileController extends AppController
 {

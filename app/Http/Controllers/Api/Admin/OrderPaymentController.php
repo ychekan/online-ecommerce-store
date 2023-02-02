@@ -13,7 +13,6 @@ use OpenApi\Attributes as OA;
  * Class OrderPaymentController
  * @package App\Http\Controllers\Api\Admin
  */
-#[OA\Tag(name: 'OrderPayment', description: 'Admin Order Payment endpoints')]
 #[Middleware(['auth:sanctum', 'role:admin,manager'])]
 #[Prefix('admin')]
 #[Where('order-payment', '[0-9]+')]

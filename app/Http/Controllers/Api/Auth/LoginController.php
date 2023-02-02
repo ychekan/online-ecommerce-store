@@ -19,7 +19,6 @@ use Spatie\RouteAttributes\Attributes\Post;
  * Class LoginController
  * @package App\Http\Controllers\Api\Auth
  */
-#[OA\Tag(name: 'Login', description: 'Login endpoints')]
 class LoginController extends AppController
 {
     /**
@@ -33,10 +32,11 @@ class LoginController extends AppController
      */
     #[OA\Post(
         path: '/api/login',
+        description: 'Login endpoints',
         requestBody: new OA\RequestBody(
             content: new OA\JsonContent(ref: '#/components/schemas/LoginRequest')
         ),
-        tags: ['Login'],
+        tags: ['Auth'],
         responses: [
             new OA\Response(
                 response: '200',

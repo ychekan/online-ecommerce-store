@@ -660,8 +660,9 @@
         "/api/forgot-password": {
             "post": {
                 "tags": [
-                    "ForgotPassword"
+                    "Auth"
                 ],
+                "description": "Forgot Password endpoints",
                 "operationId": "4a3e9135aa2e26d12d718f591de1fdce",
                 "requestBody": {
                     "content": {
@@ -697,9 +698,10 @@
         "/api/login": {
             "post": {
                 "tags": [
-                    "Login"
+                    "Auth"
                 ],
                 "summary": "Login user.",
+                "description": "Login endpoints",
                 "operationId": "1ede4abe4ada89bc305f8cb59117f0c0",
                 "requestBody": {
                     "content": {
@@ -743,8 +745,9 @@
         "/api/logout": {
             "post": {
                 "tags": [
-                    "Logout"
+                    "Auth"
                 ],
+                "description": "Logout endpoints",
                 "operationId": "1713bea214c8ec7cff47023cf266ad88",
                 "responses": {
                     "200": {
@@ -771,8 +774,9 @@
         "/api/register": {
             "post": {
                 "tags": [
-                    "Registration"
+                    "Auth"
                 ],
+                "description": "Registration endpoints",
                 "operationId": "5f0e95584653d7bbeaae9c3e51a58d4a",
                 "requestBody": {
                     "content": {
@@ -816,8 +820,9 @@
         "/api/reset-password": {
             "post": {
                 "tags": [
-                    "ResetPassword"
+                    "Auth"
                 ],
+                "description": "Reset Password endpoints",
                 "operationId": "57a07a3f4686d599373f7b77a3169c99",
                 "requestBody": {
                     "content": {
@@ -853,8 +858,9 @@
         "/api/reset-verify-email": {
             "post": {
                 "tags": [
-                    "ResetVerifyEmail"
+                    "Auth"
                 ],
+                "description": "Reset verify email",
                 "operationId": "8974fcde845ab9abb48a7576ea952e0c",
                 "requestBody": {
                     "content": {
@@ -885,9 +891,10 @@
         "/api/verify-email": {
             "post": {
                 "tags": [
-                    "VerifyEmail"
+                    "Auth"
                 ],
                 "summary": "Verify email.",
+                "description": "Verify email endpoints",
                 "operationId": "050369241908a015171cf19558f0b89c",
                 "requestBody": {
                     "content": {
@@ -1864,95 +1871,5 @@
                 "scheme": "bearer"
             }
         }
-    },
-    "tags": [
-        {
-            "name": "AdminBrand",
-            "description": "Admin Brand endpoints"
-        },
-        {
-            "name": "AdminCategory",
-            "description": "Admin Category endpoints"
-        },
-        {
-            "name": "AdminOrderAddress",
-            "description": "Admin Order Address endpoints"
-        },
-        {
-            "name": "AdminOrder",
-            "description": "Admin Order endpoints"
-        },
-        {
-            "name": "OrderItems",
-            "description": "Admin Order Item endpoints"
-        },
-        {
-            "name": "OrderPayment",
-            "description": "Admin Order Payment endpoints"
-        },
-        {
-            "name": "Permission",
-            "description": "Admin Permission endpoints"
-        },
-        {
-            "name": "AdminProduct",
-            "description": "Admin product endpoints"
-        },
-        {
-            "name": "Role",
-            "description": "Admin Role endpoints"
-        },
-        {
-            "name": "AdminUser",
-            "description": "Admin User endpoints"
-        },
-        {
-            "name": "ForgotPassword",
-            "description": "Forgot Password endpoints"
-        },
-        {
-            "name": "Login",
-            "description": "Login endpoints"
-        },
-        {
-            "name": "Logout",
-            "description": "Logout endpoints"
-        },
-        {
-            "name": "Registration",
-            "description": "Registration endpoints"
-        },
-        {
-            "name": "ResetPassword",
-            "description": "Reset Password endpoints"
-        },
-        {
-            "name": "ResetVerifyEmail",
-            "description": "Reset verify email endpoints"
-        },
-        {
-            "name": "VerifyEmail",
-            "description": "Verify email endpoints"
-        },
-        {
-            "name": "Brand",
-            "description": "Brand endpoints"
-        },
-        {
-            "name": "Category",
-            "description": "Category endpoints"
-        },
-        {
-            "name": "Order",
-            "description": "Order endpoints"
-        },
-        {
-            "name": "Product",
-            "description": "Product endpoints"
-        },
-        {
-            "name": "Profile",
-            "description": "Profile endpoints"
-        }
-    ]
+    }
 }

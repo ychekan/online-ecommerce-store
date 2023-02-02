@@ -17,7 +17,6 @@ use Spatie\RouteAttributes\Attributes\Post;
  * Class RegistrationController
  * @package App\Http\Controllers\Api\Auth
  */
-#[OA\Tag(name: 'Registration', description: 'Registration endpoints')]
 class RegistrationController extends AppController
 {
     /**
@@ -28,10 +27,11 @@ class RegistrationController extends AppController
      */
     #[OA\Post(
         path: '/api/register',
+        description: 'Registration endpoints',
         requestBody: new OA\RequestBody(
             content: new OA\JsonContent(ref: '#/components/schemas/RegisterRequest')
         ),
-        tags: ['Registration'],
+        tags: ['Auth'],
         responses: [
             new OA\Response(
                 response: '200',

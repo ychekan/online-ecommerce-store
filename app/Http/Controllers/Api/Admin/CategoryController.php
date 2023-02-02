@@ -34,7 +34,6 @@ use Spatie\RouteAttributes\Attributes\Where;
  * Class CategoryController
  * @package App\Http\Controllers\Api\Admin
  */
-#[OA\Tag(name: 'AdminCategory', description: 'Admin Category endpoints')]
 #[Middleware(['auth:sanctum', 'role:admin,manager'])]
 #[Prefix('admin')]
 #[Where('category', '[0-9]+')]

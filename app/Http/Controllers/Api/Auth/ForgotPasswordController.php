@@ -17,7 +17,6 @@ use Spatie\RouteAttributes\Attributes\Post;
  * Class ForgotPasswordController
  * @package App\Http\Controllers\Api\Auth
  */
-#[OA\Tag(name: 'ForgotPassword', description: 'Forgot Password endpoints')]
 class ForgotPasswordController extends AppController
 {
     /**
@@ -29,11 +28,12 @@ class ForgotPasswordController extends AppController
      */
     #[OA\Post(
         path: '/api/forgot-password',
+        description: 'Forgot Password endpoints',
         security: [['BearerAuth' => []]],
         requestBody: new OA\RequestBody(
             content: new OA\JsonContent(ref: '#/components/schemas/ForgotPasswordRequest')
         ),
-        tags: ['ForgotPassword'],
+        tags: ['Auth'],
         responses: [
             new OA\Response(
                 response: '200',

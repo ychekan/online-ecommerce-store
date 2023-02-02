@@ -17,7 +17,6 @@ use Spatie\RouteAttributes\Attributes\Where;
  * Class CategoryController
  * @package App\Http\Controllers\Api
  */
-#[OA\Tag(name: 'Category', description: 'Category endpoints')]
 #[Where('category', '[a-z0-1\-]+')]
 class CategoryController extends AppController
 {

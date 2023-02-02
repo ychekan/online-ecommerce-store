@@ -15,7 +15,6 @@ use Spatie\RouteAttributes\Attributes\Post;
  * Class ResetVerifyEmailController
  * @package App\Http\Controllers\Api
  */
-#[OA\Tag(name: 'ResetVerifyEmail', description: 'Reset verify email endpoints')]
 class ResetVerifyEmailController extends AppController
 {
     /**
@@ -27,10 +26,11 @@ class ResetVerifyEmailController extends AppController
      */
     #[OA\Post(
         path: '/api/reset-verify-email',
+        description: 'Reset verify email',
         requestBody: new OA\RequestBody(
             content: new OA\JsonContent(ref: '#/components/schemas/ResetVerifyEmailRequest')
         ),
-        tags: ['ResetVerifyEmail'],
+        tags: ['Auth'],
         responses: [
             new OA\Response(
                 response: '200',
