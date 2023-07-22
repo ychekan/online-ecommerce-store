@@ -2,6 +2,10 @@
 
 ## Plane:
 
+#### Env
+
+[] Update env
+
 #### Auth/Controller
 
 [x] Verify email
@@ -94,3 +98,35 @@
 [] Role crud
 
 [] User crud and change role
+
+Main features:
+
+[] Testing Auth
+
+[] Testing Profile
+
+[] Testing Order
+
+[] Testing Wishlist
+
+[] Testing Brand
+
+[] Testing Category
+
+[] Testing Admin
+
+[] Testing Admin Order
+
+[] Testing Admin Permission
+
+[] Testing Admin Role
+
+[] Testing Admin User
+
+[] Testing Admin Order Address
+
+[] Testing Admin Order Item
+
+[] Testing Admin Order Payment
+
+[] Testing Admin Product

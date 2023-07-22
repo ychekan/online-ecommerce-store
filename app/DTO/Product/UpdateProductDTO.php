@@ -6,6 +6,7 @@ namespace App\DTO\Product;
 use App\DTO\AbstractDTO;
 use Spatie\LaravelData\Attributes\Validation\Between;
 use Spatie\LaravelData\Attributes\Validation\Max;
+use Spatie\LaravelData\Attributes\Validation\Min;
 
 /**
  * Class UpdateProductDTO
@@ -25,6 +26,7 @@ final class UpdateProductDTO extends AbstractDTO
          * @var ?string Product name
          */
         #[Max(255)]
+        #[Min(5)]
         public ?string $name = null,
 
         /**

@@ -41,7 +41,7 @@ class UpdateProductRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'name' => ['string', 'max:255'],
+            'name' => ['string', 'min:5', 'max:255'],
             'price' => ['numeric', 'nullable', 'min:0', 'max:' . config('constants.max_product_price')],
             'description' => ['string', 'nullable', 'max:10000'],
             'available' => ['integer', 'nullable', 'min:0', 'max:1000'],

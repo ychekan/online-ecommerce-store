@@ -6,6 +6,7 @@ namespace App\Http\Requests\Auth;
 use App\Rules\EmailVerifiedAtRule;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
+use Illuminate\Validation\Rules\Password;
 use OpenApi\Attributes as OA;
 
 /**
@@ -33,10 +34,18 @@ class LoginRequest extends FormRequest
             'email' => [
                 'required',
                 'email',
+                Rule::exists('users', 'email')->withoutTrashed(),
                 new EmailVerifiedAtRule(),
-                Rule::exists('users', 'email')->withoutTrashed()
             ],
-            'password' => ['required'],
+            'password' => [
+                'required',
+                'max:50',
+                Password::min(8)
+                    ->letters()
+                    ->mixedCase()
+                    ->numbers()
+                    ->symbols()
+            ],
             'remember_me' => ['boolean', 'nullable'],
         ];
     }

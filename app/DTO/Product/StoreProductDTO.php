@@ -6,6 +6,7 @@ namespace App\DTO\Product;
 use App\DTO\AbstractDTO;
 use Spatie\LaravelData\Attributes\Validation\Between;
 use Spatie\LaravelData\Attributes\Validation\Max;
+use Spatie\LaravelData\Attributes\Validation\Min;
 use Spatie\LaravelData\Attributes\Validation\Unique;
 
 /**
@@ -26,6 +27,7 @@ final class StoreProductDTO extends AbstractDTO
          * @var string Product name
          */
         #[Max(255)]
+        #[Min(5)]
         #[Unique('product', 'name')]
         public string $name,
 

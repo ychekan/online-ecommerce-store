@@ -5,6 +5,7 @@ namespace App\DTO\Brand;
 
 use App\DTO\AbstractDTO;
 use Spatie\LaravelData\Attributes\Validation\Max;
+use Spatie\LaravelData\Attributes\Validation\Min;
 use Spatie\LaravelData\Attributes\Validation\Unique;
 
 /**
@@ -21,6 +22,7 @@ final class UpdateBrandDTO extends AbstractDTO
          * @var ?string Brand name
          */
         #[Max(255)]
+        #[Min(2)]
         #[Unique('categories', 'name')]
         public ?string $name = null,
     )
